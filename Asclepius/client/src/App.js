@@ -1,24 +1,32 @@
-import logo from './Asclepius.png';
+
 import './App.css';
+import { BrowserRouter as Router } from "react-router-dom";
+import { UserProfileProvider } from "./providers/UserProfileProvider";
+import ConditionProvider from "./providers/ConditionProvider";
+import CommentProvider from "./providers/CommentProvider";
+import CategoryProvider from "./providers/CategoryProvider";
+import Header from "./components/Header";
+import ApplicationViews from "./components/ApplicationViews";
+import "./main.css"
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <code>Asclepius Health</code>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+    <Router>
+      <UserProfileProvider>
+        <ConditionProvider>
+          <CommentProvider>
+            <CategoryProvider>
 
-        </a>
-      </header>
-    </div>
+              <Header />
+              <ApplicationViews />
+
+            </CategoryProvider>
+          </CommentProvider>
+        </ConditionProvider>
+      </UserProfileProvider>
+    </Router >
+
   );
 }
 
