@@ -1,32 +1,22 @@
 
-import './App.css';
+import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
+import './App.css';
 import { UserProfileProvider } from "./providers/UserProfileProvider";
-import ConditionProvider from "./providers/ConditionProvider";
-import CommentProvider from "./providers/CommentProvider";
-import CategoryProvider from "./providers/CategoryProvider";
+import { ConditionProvider } from "./providers/ConditionProvider";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
-import "./main.css"
-
 
 function App() {
   return (
     <Router>
       <UserProfileProvider>
         <ConditionProvider>
-          <CommentProvider>
-            <CategoryProvider>
-
-              <Header />
-              <ApplicationViews />
-
-            </CategoryProvider>
-          </CommentProvider>
+          <Header />
+          <ApplicationViews />
         </ConditionProvider>
       </UserProfileProvider>
-    </Router >
-
+    </Router>
   );
 }
 

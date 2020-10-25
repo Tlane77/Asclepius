@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Asclepius.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Asclepius.Repositories
 {
-    public class IConditionRepository
+    public interface IConditionRepository
     {
+        List<Condition> GetAllConditions();
     }
 }
