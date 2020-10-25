@@ -12,6 +12,7 @@ using Asclepius.Repositories;
 
 namespace Asclepius.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
@@ -22,6 +23,7 @@ namespace Asclepius.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
+        //[Authorize]
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
@@ -33,14 +35,16 @@ namespace Asclepius.Controllers
             return Ok(userProfile);
         }
 
+       // [Authorize]
         [HttpPost]
         public IActionResult Register(UserProfile userProfile)
         {
             // All newly registered users start out as a "user" user type (i.e. they are not admins)
-            
+
             _userProfileRepository.Add(userProfile);
             return CreatedAtAction(
                 nameof(GetByFirebaseUserId), new { firebaseUserId = userProfile.FirebaseUserId }, userProfile);
         }
     }
 }
+

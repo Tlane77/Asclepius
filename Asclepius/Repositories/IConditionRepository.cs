@@ -5,6 +5,12 @@ namespace Asclepius.Repositories
 {
     public interface IConditionRepository
     {
+       
         List<Condition> GetAllConditions();
+        Condition GetConditionById(int id);
+        void Add(Condition condition);
+
+        void Update(Condition condition);
+
     }
 }

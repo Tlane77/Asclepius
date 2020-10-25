@@ -23,10 +23,10 @@ namespace Asclepius.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
-                               up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId, up.IsActive,
-                               ut.Name AS UserTypeName
+                               up.Email, up.CreateDateTime, up.ImageLocation, up.IsActive
+                              
                           FROM UserProfile up
-                               LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                               
                          WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
@@ -105,8 +105,8 @@ namespace Asclepius.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT up.id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, up.Email,
-                              up.CreateDateTime, up.IsActive, up.ImageLocation, up.UserTypeId, up.IsActive,
-                              ut.[Name] AS UserTypeName
+                              up.CreateDateTime, up.IsActive, up.ImageLocation,  up.IsActive,
+                              
                          FROM UserProfile 
                             ORDER BY DisplayName
                         ";
@@ -148,7 +148,7 @@ namespace Asclepius.Repositories
                                                                  Email, CreateDateTime, ImageLocation, IsActive)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-                                                @Email, @CreateDateTime, @ImageLocation, @UserTypeId, @IsActive)";
+                                                @Email, @CreateDateTime, @ImageLocation,  @IsActive)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
@@ -174,10 +174,10 @@ namespace Asclepius.Repositories
                     {
                         cmd.CommandText = @"SELECT 
                               u.id, u.FirebaseUserId, u.FirstName, u.LastName, u.DisplayName, u.Email, 
-                              u.IsActive, u.CreateDateTime, u.ImageLocation, u.UserTypeId,
-                              ut.[Name] AS UserTypeName
+                              u.IsActive, u.CreateDateTime, u.ImageLocation, 
+                              
                          FROM UserProfile u
-                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                            
                         WHERE u.Id = @id";
 
                         cmd.Parameters.AddWithValue("@id", id);

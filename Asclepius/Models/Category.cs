@@ -7,5 +7,7 @@ namespace Asclepius.Models
 {
     public class Category
     {
+        public int Id { get; internal set; }
+        public string Name { get; internal set; }
     }
 }
