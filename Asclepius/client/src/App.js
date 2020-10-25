@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import './App.css';
 import { UserProfileProvider } from "./providers/UserProfileProvider";
-//import { COnditionProvider } from "./providers/ConditionProvider";
+//import { ConditionProvider } from "./providers/ConditionProvider";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 
