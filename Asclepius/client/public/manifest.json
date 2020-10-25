@@ -8,14 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "Asclepius.png",
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "Asclepius.png",
+      "src": "logo512.png",
       "type": "image/png",
-      "sizes": "750x750"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
