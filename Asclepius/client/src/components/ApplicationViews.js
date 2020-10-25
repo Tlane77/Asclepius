@@ -4,7 +4,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import ConditionList from "./Condition/ConditionList";
-//import ConditionForm from "./Condition/ConditionForm";
+import ConditionForm from "./Condition/ConditionForm";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -17,9 +17,9 @@ export default function ApplicationViews() {
           {isLoggedIn ? <ConditionList /> : <Redirect to="/login" />}
         </Route>
 
-        {/* <Route path="/conditionForm">
+        <Route path="/add" exact>
           {isLoggedIn ? <ConditionForm /> : <Redirect to="/login" />}
-        </Route> */}
+        </Route>
 
         <Route path="/login">
           <Login />
