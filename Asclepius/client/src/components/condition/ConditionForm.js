@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory } from "react-router-dom";
-import { ImageContext } from "../../providers/ImageProvider";
+
 
 
 const ConditionForm = () => {

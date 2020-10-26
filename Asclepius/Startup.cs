@@ -27,7 +27,7 @@ namespace Asclepius
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IConditionRepository, ConditionRepository>();
             //services.AddTransient<ICommentRepository, CommentRepository>();
-            //services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
         
 

@@ -21,7 +21,7 @@ export default function ApplicationViews() {
 
         <Route path="/add" exact>
           {/* {isLoggedIn ? <ConditionForm /> : <Redirect to="/login" />} */}
-          {isLoggedIn ? <ConditionForm /> : <ConditionForm />}
+          {/* {isLoggedIn ? <ConditionForm /> : <ConditionForm />} */}
         </Route>
 
 
