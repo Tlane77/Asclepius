@@ -27,7 +27,7 @@ namespace Asclepius.Repositories
                               
                           FROM UserProfile up
                                
-                         WHERE FirebaseUserId = @FirebaseuserId";
+                         WHERE up.FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
