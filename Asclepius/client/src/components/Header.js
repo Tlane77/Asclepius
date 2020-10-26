@@ -30,30 +30,14 @@ export default function Header() {
                                     <NavLink tag={RRNavLink} to="/">Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/posts">Condition</NavLink>
+                                    <NavLink tag={RRNavLink} to="/conditions">Condition</NavLink>
                                 </NavItem>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/my_posts">My Conditions</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/searchbytag">Search by Category</NavLink>
-                                </NavItem>
+                               
+                               
                             </>
                         }
                     </Nav>
-                    <Nav navbar style={{ marginRight: "10%" }}>
-                        {isLoggedIn &&
-                            <>
-                                <NavItem>
-                                    <NavLink tag={RRNavLink} to="/user">User Profiles</NavLink>
-                                </NavItem>
-
-
-                            </>
-
-                        }
-                    </Nav>
-
+                    
                     <Nav navbar>
                         {isLoggedIn &&
                             <>

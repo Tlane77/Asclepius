@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Asclepius.Repositories;
+using Microsoft.IdentityModel.Tokens;
+
 
 
 namespace Asclepius
@@ -22,30 +25,50 @@ namespace Asclepius
         {
             services.AddControllers();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
-            //services.AddTransient<IConditionRepository, ConditionRepository>();
+            services.AddTransient<IConditionRepository, ConditionRepository>();
             //services.AddTransient<ICommentRepository, CommentRepository>();
             //services.AddTransient<ICategoryRepository, CategoryRepository>();
 
+        
+
+        var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
+        var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+            options.Authority = googleTokenUrl;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = googleTokenUrl,
+                ValidateAudience = true,
+                ValidAudience = firebaseProjectId,
+                ValidateLifetime = true
+            };
+        });
+
+            services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment() || env.IsEnvironment("Local"))
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseDeveloperExceptionPage();
         }
+
+        app.UseHttpsRedirection();
+
+        app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
+}
 }
