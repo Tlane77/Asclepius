@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory } from "react-router-dom";
+import { ImageContext } from "../../providers/ImageProvider";
 
 
 const ConditionForm = () => {
@@ -21,6 +22,21 @@ const ConditionForm = () => {
     const title = useRef();
     const content = useRef();
     const imageUrl = useRef();
+    const [imagePreview, setImagePreview] = useState(null);
+    const [imageLocation, setImageLocation] = useState("");
+
+    const previewImage = evt => {
+        if (evt.target.files.length) {
+            setImagePreview(URL.createObjectURL(evt.target.files[0]));
+        }
+    };
+
+    const previewImageUrl = evt => {
+        if (evt.target.value.length) {
+            setImagePreview(evt.target.value);
+        }
+    }
+
 
 
 
@@ -67,7 +83,7 @@ const ConditionForm = () => {
                                     type="file"
                                     name="file"
                                     id="imageUpload"
-
+                                    onChange={e => previewImage(e)}
                                     onClick={() => imageUrl.current.value = ""} />
                                 <InputGroup className="mt-2">
                                     <Input

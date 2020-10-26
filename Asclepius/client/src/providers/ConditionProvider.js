@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
 
+
 export const ConditionContext = React.createContext();
 
 export const ConditionProvider = (props) => {
@@ -37,10 +38,22 @@ export const ConditionProvider = (props) => {
                 throw new Error("Unauthorized");
             }));
 
+    const EditCondition = (condition) =>
+        getToken().then((token) =>
+            fetch(`/api/conditon/${condition.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(condition),
+            }));
+
+
 
 
     return (
-        <ConditionContext.Provider value={{ condition, conditions, getAllConditions,addCondition }}>
+        <ConditionContext.Provider value={{ condition, conditions, getAllConditions, addCondition, EditCondition }}>
             {props.children}
         </ConditionContext.Provider>
     );

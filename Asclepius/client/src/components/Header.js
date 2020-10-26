@@ -15,6 +15,7 @@ export default function Header() {
     const { isLoggedIn, logout } = useContext(UserProfileContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const { users, auser, getAllUsers, currentUser, getUserById, getCurrentUser } = useContext(UserProfileContext);
 
     return (
         <div>
@@ -32,12 +33,12 @@ export default function Header() {
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/conditions">Condition</NavLink>
                                 </NavItem>
-                               
-                               
+
+
                             </>
                         }
                     </Nav>
-                    
+
                     <Nav navbar>
                         {isLoggedIn &&
                             <>
@@ -61,6 +62,8 @@ export default function Header() {
                             </>
                         }
                     </Nav>
+
+
                     <Nav navbar>
                         <NavItem>
                             <a aria-current="page" className="nav-link"

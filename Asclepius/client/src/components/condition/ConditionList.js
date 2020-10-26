@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, } from "react";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory, Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
@@ -19,7 +19,7 @@ const ConditionList = () => {
                 <div className="row justify-content-left">
                     <Button color="danger"
                         onClick={() => { history.push(`/add/`) }}>
-                        add condition
+                        Add a Condition
                     </Button>
                     <Table>
 
