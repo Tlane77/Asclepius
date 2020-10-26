@@ -53,7 +53,7 @@ const Condition = ({ condition }) => {
             <Card className="m-4">
                 <Row margin="m-4">
                     <Col sm="4">
-                        <p className="text-left px-2">Posted by: {condition.userProfile.displayName}</p>
+                        <p className="text-left px-2">Author: {condition.userProfile.displayName}</p>
                     </Col>
                     <Col sm="4">
                         <p><strong>{condition.title}</strong></p>
@@ -73,7 +73,7 @@ const Condition = ({ condition }) => {
 
                         <Col sm="4">
                             {window.location.href == "http://localhost:3000/condition" ?
-                                <NavLink to={`condition/delete/${condition.id}`}><Button>Delete Post</Button></NavLink> : <NavLink to={`delete/${condition.id}`}><Button>Delete Condition</Button></NavLink>}
+                                <NavLink to={`condition/delete/${condition.id}`}><Button>Delete Condition</Button></NavLink> : <NavLink to={`delete/${condition.id}`}><Button>Delete Condition</Button></NavLink>}
                         </Col>
                     </Row>
                 </CardBody>

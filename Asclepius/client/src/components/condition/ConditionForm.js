@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import {
     Form,
     FormGroup,
@@ -8,22 +8,35 @@ import {
     Input,
     Button,
     InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Alert
 
 } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory } from "react-router-dom";
+import { CategoryContext } from "../../providers/CategoryProvider";
+import { ImageContext } from "../../providers/ImageProvider";
 
 
 
 const ConditionForm = () => {
     const { addCondition } = useContext(ConditionContext);
     const [categoryId, setCategoryId] = useState(0);
+    const { categories, getAllCategories } = useContext(CategoryContext);
     const history = useHistory();
     const title = useRef();
     const content = useRef();
     const imageUrl = useRef();
     const [imagePreview, setImagePreview] = useState(null);
     const [imageLocation, setImageLocation] = useState("");
+    const { uploadImage } = useContext(ImageContext);
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    useEffect(() => {
+        getAllCategories()
+    }, []);
 
     const previewImage = evt => {
         if (evt.target.files.length) {
@@ -36,6 +49,16 @@ const ConditionForm = () => {
             setImagePreview(evt.target.value);
         }
     }
+
+    // const handleFieldChange = evt => {
+    //     const stateToChange = { ...condition }
+    //     stateToChange[evt.target.id] = evt.target.value
+    //     setCondition(stateToChange)
+    // }
+
+    // const handleImgChange = e => {
+    //     setFile(e.target.files[0]);
+    // }
 
 
 
@@ -58,12 +81,55 @@ const ConditionForm = () => {
         if (condition.categoryId === 0) {
             window.alert("Please Select A Category")
         }
-    }
+        // Image Upload
+        const file = document.querySelector('input[type="file"]').files[0];
+
+        if (file !== undefined) {
+            const fileType = file.name.split('.').pop();
+
+            const availFileTypes = [
+                'png',
+                'bmp',
+                'jpeg',
+                'jpg',
+                'gif',
+                'PNG',
+                'BMP',
+                'JPEG',
+                'GIF',
+                'JPG'
+            ];
+
+            if (!availFileTypes.includes(fileType)) {
+                alert('Accepted Image File Types: .png, .bmp, .jpeg, .jpg, and .gif');
+                return;
+            }
+            else {
+                const newImageName = `${new Date().getTime()}.${fileType}`;
+
+                const formData = new FormData();
+                formData.append('file', file, newImageName);
+                uploadImage(formData, newImageName);
+                condition.imageLocation = newImageName;
+            }
+        }
+        else if (file === undefined && imageUrl.current.value !== "") {
+            condition.imageLocation = imageUrl.current.value;
+        }
+
+        if (condition.title !== "" && condition.content !== "" && condition.categoryId !== 0) {
+            addCondition().then((res) => {
+                history.push(`/conditions/${res.id}`);
+            });
+        }
+
+    };
 
     return (
         <div className="container pt-4">
             <div className="row justify-content-center">
                 <Card className="col-sm-12 col-lg-6">
+                    <h3 className="mt-3 text-primary text-center card-title">Condition Topic?</h3>
                     <CardBody>
                         <Form encType="multipart/form-data">
                             <FormGroup>
@@ -73,19 +139,25 @@ const ConditionForm = () => {
                                     innerRef={title}
                                 />
                             </FormGroup>
+
                             <FormGroup>
                                 <Label for="content">Content</Label>
                                 <Input type="textarea" rows="10" id="content" innerRef={content} />
                             </FormGroup>
+
                             <FormGroup>
                                 <Label for="imageUpload">Upload an Image</Label>
                                 <Input
                                     type="file"
                                     name="file"
                                     id="imageUpload"
-                                    onChange={e => previewImage(e)}
+                                    onChange={previewImage}
                                     onClick={() => imageUrl.current.value = ""} />
                                 <InputGroup className="mt-2">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>OR</InputGroupText>
+                                    </InputGroupAddon>
+
                                     <Input
                                         type="text"
                                         name="imageUrl"
@@ -93,7 +165,22 @@ const ConditionForm = () => {
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
-
+                                {
+                                    imagePreview === null ?
+                                        <Alert color="dark">No image provided.</Alert>
+                                        : <img src={imagePreview} alt="preview" className="img-thumbnail" />
+                                }
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="categoryId">Category</Label>
+                                <select defaultValue="" name="categoryId" id="categoryId" className="form-control" onChange={(e) => setCategoryId(e.target.value)}>
+                                    <option value="0">Select a Category</option>
+                                    {categories.map(e => (
+                                        <option key={e.id} value={e.id}>
+                                            {e.name}
+                                        </option>
+                                    ))}
+                                </select>
                             </FormGroup>
 
                         </Form>
