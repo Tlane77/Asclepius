@@ -44,15 +44,15 @@ export function CategoryProvider(props) {
             }));
 
     const updateCategory = (category) =>
-            getToken().then((token) =>
-                fetch(`/api/category/${category.id}`, {
-                    method: "PUT",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(category)
-                }));
+        getToken().then((token) =>
+            fetch(`/api/category/${category.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(category)
+            }));
 
     const deleteCategory = (id) =>
         getToken().then((token) =>
@@ -64,7 +64,7 @@ export function CategoryProvider(props) {
                 }
             }));
 
-   
+
 
     return (
         <CategoryContext.Provider value={{ categories, getAllCategories, getById, addCategory, deleteCategory, updateCategory }}>

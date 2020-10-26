@@ -15,12 +15,12 @@ export default function ApplicationViews() {
     <main>
       <Switch>
         <Route path="/conditions" exact>
-          {/* {isLoggedIn ? <ConditionList /> : <Redirect to="/login" />} */}
-          {isLoggedIn ? <ConditionList /> : <ConditionList />}
+          {isLoggedIn ? <ConditionList /> : <Redirect to="/login" />}
+          {/* {isLoggedIn ? <ConditionList /> : <ConditionList />} */}
         </Route>
 
         <Route path="/add" exact>
-          {/* {isLoggedIn ? <ConditionForm /> : <Redirect to="/login" />} */}
+          {isLoggedIn ? <ConditionForm /> : <Redirect to="/login" />}
           {/* {isLoggedIn ? <ConditionForm /> : <ConditionForm />} */}
         </Route>
 
