@@ -29,16 +29,16 @@ export default function CategoryForm() {
                         <Input id="nameText" type="text" onChange={evt => setNameText(evt.target.value)} />
                     </FormGroup>
                     <Row>
-                    <FormGroup>
-                        <Button color="danger">Add Category</Button>
-                    </FormGroup>
-                    <FormGroup>
-                        <Button type="button"
+                        <FormGroup>
+                            <Button color="danger">Add Category</Button>
+                        </FormGroup>
+                        <FormGroup>
+                            <Button type="button"
                                 className="goBackEditCategory"
                                 onClick={e => {
-                                history.push("/category")
+                                    history.push("/category")
                                 }}>Go Back</Button>
-                    </FormGroup>
+                        </FormGroup>
                     </Row>
                 </Form>
             </div>
