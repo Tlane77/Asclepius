@@ -153,7 +153,7 @@ const ConditionForm = () => {
                                     type="file"
                                     name="file"
                                     id="imageUpload" />
-                                    {/* onChange={previewImage}
+                                {/* onChange={previewImage}
                                     onClick={() => imageUrl.current.value = ""} */}
                                 {/* <InputGroup className="mt-2">
                                     <InputGroupAddon addonType="prepend">

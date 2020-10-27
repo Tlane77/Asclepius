@@ -31,11 +31,10 @@ const UserProfileList = (props) => {
                         <tr>
                             <th>Username</th>
                             <th>Name</th>
-                            <th>User Type</th>
                         </tr>
                     </thead>
 
-                    {activeUsers.map((user) => (
+                    {currentUser.map((user) => (
                         <tbody key={user.id}>
                             <tr>
                                 <th scope="row">

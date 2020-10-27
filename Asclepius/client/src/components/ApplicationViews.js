@@ -95,7 +95,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <CommentProvider><CommentEditForm /> </CommentProvider> : <Redirect to="/login/" />}
         </Route>
 
-        <Route path="/conditions/:postId/comments" exact>
+        <Route path="/conditions/:conditionId/comments" exact>
           {isLoggedIn ? <CommentProvider> <CommentList /> </CommentProvider> : <Redirect to="/login/" />}
         </Route>
 
@@ -115,6 +115,8 @@ export default function ApplicationViews() {
         <Route path="/user/:id(\d+)/edit" exact>
           {isLoggedIn ? <UserProfileEdit /> : <Redirect to="/login/" />}
         </Route>
+
+        {/* End User Profile Routes */}
 
         <Route path="/register">
           <Register />

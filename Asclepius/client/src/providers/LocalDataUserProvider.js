@@ -1,3 +1,4 @@
+//Helper File to Retrieve Data from Local Session Storage
 import React, { createContext } from "react";
 
 export const LocalDataUserContext = createContext();
@@ -9,11 +10,11 @@ export function LocalDataUserProvider(props) {
     const userFullName = JSON.parse(sessionStorage.getItem("userProfile")).fullName;
     const userImageLoc = JSON.parse(sessionStorage.getItem("userProfile")).imageLocation;
     const userDisplayName = JSON.parse(sessionStorage.getItem("userProfile")).displayName;
-    const userTypeName = JSON.parse(sessionStorage.getItem("userProfile")).userType.name;
+
 
     return (
         <LocalDataUserContext.Provider
-            value={{ userId, userFirstName, userLastName, userFullName, userImageLoc, userDisplayName, userTypeName }}>
+            value={{ userId, userFirstName, userLastName, userFullName, userImageLoc, userDisplayName, }}>
             {props.children}
         </LocalDataUserContext.Provider>
     );

@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { Card, CardImg, CardBody, Row, Button, Col } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
+import CommentList from "../Comment/CommentList";
 
 const Condition = ({ condition }) => {
     const { activeUser } = useContext(UserProfileContext);
-    
+
     if (condition.userProfileId == parseInt(sessionStorage.userProfileId)) {
         return (
 
@@ -28,6 +29,7 @@ const Condition = ({ condition }) => {
                         <Col sm="4">
                             {window.location.href == "http://localhost:3000/condition" ?
                                 <NavLink to={`condition/details/${condition.id}`}><Button >Details</Button></NavLink> : <NavLink to={`details/${condition.id}`}><Button >Details</Button></NavLink>}
+                            <CommentList />
                         </Col>
                         <Col sm="4">
                             {window.location.href == "http://localhost:3000/condition" ?

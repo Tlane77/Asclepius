@@ -19,8 +19,8 @@ export default function Header() {
 
     return (
         <div>
-            <Navbar color="light" light expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">Asclepius</NavbarBrand>
+            <Navbar color="light" light expand="ml-lg-auto">
+                <NavbarBrand tag={RRNavLink} to="/"><strong>Asclepius</strong></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
