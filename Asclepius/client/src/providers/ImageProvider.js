@@ -9,30 +9,30 @@ export const ImageProvider = (props) => {
 
     const uploadImage = (info) =>
         getToken().then((token) =>
-        fetch('/api/image', {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            body: info
-        }).then(resp => {
-            if (resp.ok) {
-                return;
-            }
-            throw new Error("Upload Image Error.")
-        })); 
+            fetch('/api/image', {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                body: info
+            }).then(resp => {
+                if (resp.ok) {
+                    return;
+                }
+                throw new Error("Upload Image Error.")
+            }));
 
     const getImageUrl = (imageUrl) => {
         const getUrl = `/api/image/${imageUrl}`
-        return(getUrl)
-    }; 
-    
-   
+        return (getUrl)
+    };
 
 
-        return (
-            <ImageContext.Provider value={{ getImageUrl, uploadImage }}>
-                {props.children}
-            </ImageContext.Provider>
-        );
+
+
+    return (
+        <ImageContext.Provider value={{ getImageUrl, uploadImage }}>
+            {props.children}
+        </ImageContext.Provider>
+    );
 };
