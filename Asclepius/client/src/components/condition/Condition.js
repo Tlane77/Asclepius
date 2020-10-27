@@ -5,7 +5,7 @@ import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 const Condition = ({ condition }) => {
     const { activeUser } = useContext(UserProfileContext);
-
+    
     if (condition.userProfileId == parseInt(sessionStorage.userProfileId)) {
         return (
 

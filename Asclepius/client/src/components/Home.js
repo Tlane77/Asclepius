@@ -4,6 +4,9 @@ import { useHistory, Link } from "react-router-dom";
 import "./Home.css"
 
 
-const HomePage = () => {
+const Home = () => {
 
 }
+
+
+export default Home;
