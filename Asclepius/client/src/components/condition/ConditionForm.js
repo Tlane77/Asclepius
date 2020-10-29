@@ -116,7 +116,7 @@ const ConditionForm = () => {
 
         if (condition.title !== "" && condition.content !== "" && condition.categoryId !== 0) {
             addCondition(condition).then((condition) => {
-                history.push(`/conditions/details/${condition.id}`);
+                history.push(`/conditions`);
             });
         }
 

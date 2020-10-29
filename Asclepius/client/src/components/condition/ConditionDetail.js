@@ -15,26 +15,19 @@ const ConditionDetail = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isAuthor, setIsAuthor] = useState(false);
     const { getImageName } = useContext(ImageContext);
-    const { conditionId } = useParams();
+    const { id } = useParams();
     const history = useHistory();
-    const [oneCondition, setOneCondition] = useState();
     const { userProfile } = useContext(UserProfileContext);
     const { activeUser } = useContext(UserProfileContext);
-    const { id } = useParams();
+   
 
-    // useEffect(() => {
-
-    //     getSingleCondition(conditionId).then(setOneCondition)
-
-
-    // }, []);
 
     useEffect(() => {
 
         getSingleCondition(id)
-        console.log("singleCondition", conditionId)
+        console.log("singleCondition", id)
     }, []);
-    console.log("singleCondition", conditionId)
+    console.log("singleCondition", id)
 
 
 
@@ -109,14 +102,14 @@ const ConditionDetail = () => {
                     {JSON.parse(sessionStorage.getItem("userProfile")).id === condition.userProfileId && <Button color="danger"
                         style={{ margin: 10 }}
 
-                        onClick={() => { history.push(`/conditions/delete/${conditionId}`) }}>
+                        onClick={() => { history.push(`/conditions/delete/${id}`) }}>
                         Delete
 
                 </Button >}
                     {JSON.parse(sessionStorage.getItem("userProfile")).id === condition.userProfileId && <Button color="info"
                         style={{ margin: 10 }}
 
-                        onClick={() => { history.push(`/conditions/edit/${conditionId}`) }}>
+                        onClick={() => { history.push(`/conditions/edit/${id}`) }}>
                         Edit
 
                 </Button >}

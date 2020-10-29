@@ -137,7 +137,7 @@ namespace Asclepius.Repositories
                         INSERT INTO Condition (Title, Content, ImageLocation, CreateDateTime, 
                                           CategoryId, UserProfileId)
                         OUTPUT INSERTED.ID
-                        VALUES (@Title, @Content, @ImageLocation, GETDATE(), @CategoryId, @UserProfileId)";
+                        VALUES (@Title, @Content, @ImageLocation, @CreateDateTime, @CategoryId, @UserProfileId)";
 
                     DbUtils.AddParameter(cmd, "@Title", condition.Title);
                     DbUtils.AddParameter(cmd, "@Content", condition.Content);

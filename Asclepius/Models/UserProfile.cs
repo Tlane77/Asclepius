@@ -21,7 +21,7 @@ namespace Asclepius.Models
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        [Required]
+        
         [MaxLength(50)]
         public string DisplayName { get; set; }
 

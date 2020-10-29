@@ -11,6 +11,7 @@ using Asclepius.Repositories;
 
 namespace Asclepius.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConditionController : ControllerBase
@@ -18,10 +19,13 @@ namespace Asclepius.Controllers
         private readonly IConditionRepository _conditionRepository;
         private readonly IUserProfileRepository _userProfileRepository;
 
+       
         public ConditionController(IConditionRepository conditionRepository, IUserProfileRepository userProfileRepository)
         {
             _conditionRepository = conditionRepository;
-           
+            _userProfileRepository = userProfileRepository;
+
+
         }
 
         //GRAB ALL THE CONDITIONS 
@@ -48,8 +52,9 @@ namespace Asclepius.Controllers
         {
             var currentUserProfile = GetCurrentUserProfile();
             condition.UserProfileId = currentUserProfile.Id;
+            condition.CreateDateTime = DateTime.Now;
             _conditionRepository.Add(condition);
-            return CreatedAtAction("Get", new { id = condition.Id }, condition);
+            return Ok(CreatedAtAction("Get", new { id = condition.Id }, condition));
         }
 
        
