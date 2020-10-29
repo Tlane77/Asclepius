@@ -64,6 +64,9 @@ const ConditionDetail = () => {
     // const formatedDate = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
 
 
+     if (condition.userProfile == undefined) {
+         return null;
+     }
     return (
         <div className="conditionDetailsCardContainer">
             <Card className="m-auto">
