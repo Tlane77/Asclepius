@@ -6,8 +6,9 @@ export const ConditionContext = React.createContext();
 
 export const ConditionProvider = (props) => {
     const [conditions, setConditions] = useState([]);
-    const [condition, setCondition] = useState([]);
+    const [condition, setCondition] = useState({});
     const { getToken } = useContext(UserProfileContext);
+
 
     //View All Conditions
     const getAllConditions = () => {
@@ -19,6 +20,18 @@ export const ConditionProvider = (props) => {
                 }
             }).then((res) => res.json())
                 .then(setConditions));
+    }
+
+    ///Get Single Condition
+    const getSingleCondition = (id) => {
+        getToken().then((token) =>
+            fetch(`/api/condition/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => res.json())
+                .then(setCondition));
     }
 
     //Add a Condition
@@ -53,7 +66,7 @@ export const ConditionProvider = (props) => {
 
 
     return (
-        <ConditionContext.Provider value={{ condition, conditions, getAllConditions, addCondition, EditCondition }}>
+        <ConditionContext.Provider value={{ condition, conditions, setCondition, setConditions, getAllConditions, addCondition, EditCondition, getSingleCondition }}>
             {props.children}
         </ConditionContext.Provider>
     );

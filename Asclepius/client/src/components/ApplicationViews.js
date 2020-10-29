@@ -4,8 +4,10 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import ConditionList from "./Condition/ConditionList";
+import UserConditionList from "./Condition/UserConditionList";
 import ConditionForm from "./Condition/ConditionForm";
 import EditCondition from "./Condition/EditCondition";
+import ConditionDetail from "./Condition/ConditionDetail"
 import DeleteCondition from "./Condition/DeleteCondition";
 import CategoryList from "./Category/CategoryList";
 import CategoryForm from "./Category/CategoryForm";
@@ -42,6 +44,10 @@ export default function ApplicationViews() {
             : <Redirect to="/login" />}
         </Route>
 
+        <Route path="/user_conditions" exact>
+          {isLoggedIn ? <UserConditionList /> : <Redirect to="/login" />}
+        </Route>
+
         {/* Start of Condition Routes */}
         <Route path="/conditions" exact>
           {isLoggedIn ? <ConditionList /> : <Redirect to="/login" />}
@@ -58,7 +64,11 @@ export default function ApplicationViews() {
           {isLoggedIn ? <EditCondition /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/conditions/delete/:conditionId(\d+)" exact>
+        <Route path="/conditions/details/:id" exact>
+          {isLoggedIn ? <ConditionDetail /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/conditions/delete/:id" exact>
           {isLoggedIn ? <DeleteCondition /> : <Redirect to="/login" />}
         </Route>
 

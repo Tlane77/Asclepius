@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, CardBody, CardText, Button, Row, Col, Table } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
 import { Link, } from "react-router-dom";
 import "./Category.css"
 

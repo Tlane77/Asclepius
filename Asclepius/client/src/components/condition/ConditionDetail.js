@@ -1,47 +1,74 @@
 import React, { useEffect, useContext, useState } from "react";
-import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
-import { ConditionContext } from "../../providers/ConditionProvider"
+import { ListGroup, ListGroupItem, Card, Row, Col, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
+import { ConditionContext } from "../../providers/ConditionProvider";
 import { ImageContext } from '../../providers/ImageProvider';
 import { useParams, useHistory, Link } from "react-router-dom";
 import "./Condition.css"
+import { NavLink } from "react-router-dom";
+import { UserProfileContext } from "../../providers/UserProfileProvider";
+import CommentList from "../Comment/CommentList";
+import { CommentContext, CommentsContext } from "../../providers/CommentProvider";
 
 
 const ConditionDetail = () => {
-    const [condition, setCondition] = useState();
-    const { getSingleCondition } = useContext(ConditionContext);
-    const { getImageUrl } = useContext(ImageContext)
+    const { getSingleCondition, condition } = useContext(ConditionContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isAuthor, setIsAuthor] = useState(false);
+    const { getImageName } = useContext(ImageContext);
     const { conditionId } = useParams();
     const history = useHistory();
-    const [isLoading, setIsLoading] = useState(false)
-    const [isAuthor, setIsAuthor] = useState(false)
-    const imageUrl = getImageUrl(condition.imageLocation);
+    const [oneCondition, setOneCondition] = useState();
+    const { userProfile } = useContext(UserProfileContext);
+    const { activeUser } = useContext(UserProfileContext);
+    const { id } = useParams();
+
+    // useEffect(() => {
+
+    //     getSingleCondition(conditionId).then(setOneCondition)
+
+
+    // }, []);
 
     useEffect(() => {
-        getSingleCondition(conditionId).then(setCondition);
-    });
 
-    useEffect(() => {
-        //verify there condition is not undefined before getting subscriptions
-        condition(JSON.parse(sessionStorage.getItem("userProfile")).id, condition.userProfileId)
-    }, [condition]);
+        getSingleCondition(id)
+        console.log("singleCondition", conditionId)
+    }, []);
+    console.log("singleCondition", conditionId)
 
-    useEffect(() => {
-        //ensure condition is not undefined
-        if (condition) {
-            //determine if current use is condition author
-            if (JSON.parse(sessionStorage.getItem("userProfile")).id == condition.userProfileId) {
-                setIsAuthor(true)
-            }
 
-        }
 
-    });
+
+
+    const imageName = () => {
+        if (condition != undefined) { getImageName(condition.imageLocation) }
+    }
+    // useEffect(() => {
+    //     //verify there condition is not undefined before getting subscriptions
+    //     condition(JSON.parse(sessionStorage.getItem("userProfile")).id, condition.userProfileId)
+    // }, [condition]);
+
+    // useEffect(() => {
+    //     //ensure condition is not undefined
+    //     if (condition) {
+    //         //determine if current use is condition author
+    //         if (JSON.parse(sessionStorage.getItem("userProfile")).id == condition.userProfileId) {
+    //             setIsAuthor(true)
+    //         }
+
+    // }
+
+    //});
 
 
     //formated publication date to MM / DD / YYYY
 
-    const createDate = new Date(condition.createDateTime)
-    const formatedDate = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
+
+
+    const createDate = () => {
+        if (condition != undefined) { new Date(condition.createDateTime) }
+    }
+    // const formatedDate = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
 
 
     return (
@@ -59,11 +86,11 @@ const ConditionDetail = () => {
                 {condition.imageLocation === "" || condition.imageLocation === null ?
                     <CardImg top />
                     :
-                    <CardImg top src={condition.imageLocation[0] === "h" ? condition.imageLocation : imageUrl} alt={condition.title} />
+                    <CardImg top src={imageName} alt={condition.title} />
                 }
                 <CardBody>
                     <p style={{ whiteSpace: "pre-wrap" }}>{condition.content}</p>
-                    <p>{formatedDate}</p>
+                    <p>{condition.createDateTime}</p>
                     <Button type="button"
                         style={{ margin: 10 }}
                         onClick={() => { history.goBack() }}>
@@ -94,6 +121,25 @@ const ConditionDetail = () => {
 
                 </Button >}
                 </CardBody >
+
+                <CardBody>
+                    {/* <Row>
+                        <Col sm="4">
+                            {window.location.href == "http://localhost:3000/condition" ?
+                                <NavLink to={`condition/details/${condition.id}`}><Button >Details</Button></NavLink> : <NavLink to={`details/${condition.id}`}><Button >Details</Button></NavLink>}
+                            <CommentList />
+                        </Col>
+                        <Col sm="4">
+                            {window.location.href == "http://localhost:3000/condition" ?
+                                <NavLink to={`condition/edit/${condition.id}`}><Button>Edit Condition</Button></NavLink> : <NavLink to={`edit/${condition.id}`}><Button>Edit Condition</Button></NavLink>}
+                        </Col>
+                        <Col sm="4">
+                            {window.location.href == "http://localhost:3000/condition" ?
+                                <NavLink to={`condition/delete/${condition.id}`}><Button>Delete Condition</Button></NavLink> : <NavLink to={`delete/${condition.id}`}><Button>Delete Condition</Button></NavLink>}
+                        </Col>
+                    </Row> */}
+                </CardBody>
+
             </Card >
         </div>
     );

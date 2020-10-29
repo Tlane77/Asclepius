@@ -27,38 +27,31 @@ const ConditionForm = () => {
     const history = useHistory();
     const title = useRef();
     const content = useRef();
-    //const imageUrl = useRef();
-    // const [imagePreview, setImagePreview] = useState(null);
+    const imageName = useRef();
+    const [imagePreview, setImagePreview] = useState(null);
     const [imageLocation, setImageLocation] = useState("");
     const { uploadImage } = useContext(ImageContext);
     const [isLoading, setIsLoading] = useState(false);
+
 
 
     useEffect(() => {
         getAllCategories()
     }, []);
 
-    // const previewImage = evt => {
-    //     if (evt.target.files.length) {
-    //         setImagePreview(URL.createObjectURL(evt.target.files[0]));
-    //     }
-    // };
+    const previewImage = evt => {
+        if (evt.target.files.length) {
+            setImagePreview(URL.createObjectURL(evt.target.files[0]));
+        }
+    };
 
-    // const previewImageUrl = evt => {
-    //     if (evt.target.value.length) {
-    //         setImagePreview(evt.target.value);
-    //     }
-    // }
+    const previewImageName = evt => {
+        if (evt.target.value.length) {
+            setImagePreview(evt.target.value);
+        }
+    }
 
-    // const handleFieldChange = evt => {
-    //     const stateToChange = { ...condition }
-    //     stateToChange[evt.target.id] = evt.target.value
-    //     setCondition(stateToChange)
-    // }
 
-    // const handleImgChange = e => {
-    //     setFile(e.target.files[0]);
-    // }
 
 
 
@@ -69,9 +62,12 @@ const ConditionForm = () => {
             title: title.current.value,
             content: content.current.value,
             categoryId,
-            userProfileId: JSON.parse(sessionStorage.getItem("userProfile")).id
+
         };
+
+
         condition.categoryId = JSON.parse(condition.categoryId)
+
         if (condition.title === "") {
             window.alert("Please Add Title")
         }
@@ -82,47 +78,47 @@ const ConditionForm = () => {
             window.alert("Please Select A Category")
         }
         //     // Image Upload
-        //     const file = document.querySelector('input[type="file"]').files[0];
+        const file = document.querySelector('input[type="file"]').files[0];
 
-        //     if (file !== undefined) {
-        //         const fileType = file.name.split('.').pop();
+        if (file !== undefined) {
+            const fileType = file.name.split('.').pop();
 
-        //         const availFileTypes = [
-        //             'png',
-        //             'bmp',
-        //             'jpeg',
-        //             'jpg',
-        //             'gif',
-        //             'PNG',
-        //             'BMP',
-        //             'JPEG',
-        //             'GIF',
-        //             'JPG'
-        //         ];
+            const availFileTypes = [
+                'png',
+                'bmp',
+                'jpeg',
+                'jpg',
+                'gif',
+                'PNG',
+                'BMP',
+                'JPEG',
+                'GIF',
+                'JPG'
+            ];
 
-        //         if (!availFileTypes.includes(fileType)) {
-        //             alert('Accepted Image File Types: .png, .bmp, .jpeg, .jpg, and .gif');
-        //             return;
-        //         }
-        //         else {
-        //             const newImageName = `${new Date().getTime()}.${fileType}`;
+            if (!availFileTypes.includes(fileType)) {
+                alert('Accepted Image File Types: .png, .bmp, .jpeg, .jpg, and .gif');
+                return;
+            }
+            else {
+                const newImageName = `${new Date().getTime()}.${fileType}`;
 
-        //             const formData = new FormData();
-        //             formData.append('file', file, newImageName);
-        //             uploadImage(formData, newImageName);
-        //             condition.imageLocation = newImageName;
-        //         }
-        //     }
+                const formData = new FormData();
+                formData.append('file', file, newImageName);
+                uploadImage(formData, newImageName);
+                condition.imageLocation = newImageName;
+            }
+        }
 
-        //     else if (file === undefined && imageUrl.current.value == "") {///Removed ! to test-tl
-        //         condition.imageLocation = imageUrl.current.value;
-        //     }
+        else if (file === undefined && imageName.current.value == "") {///Removed ! to test-tl
+            condition.imageLocation = imageName.current.value;
+        }
 
-        //     if (condition.title !== "" && condition.content !== "" && condition.categoryId !== 0) {
-        //         addCondition().then((res) => {
-        //             history.push(`/conditions/${res.id}`);
-        //         });
-        //     }
+        if (condition.title !== "" && condition.content !== "" && condition.categoryId !== 0) {
+            addCondition(condition).then((condition) => {
+                history.push(`/conditions/details/${condition.id}`);
+            });
+        }
 
     };
 
@@ -139,6 +135,8 @@ const ConditionForm = () => {
                                 <Input
                                     id="title"
                                     innerRef={title}
+
+
                                 />
                             </FormGroup>
 
@@ -152,26 +150,30 @@ const ConditionForm = () => {
                                 <Input
                                     type="file"
                                     name="file"
-                                    id="imageUpload" />
-                                {/* onChange={previewImage}
-                                    onClick={() => imageUrl.current.value = ""} */}
-                                {/* <InputGroup className="mt-2">
+                                    id="imageUpload"
+
+                                    onChange={previewImage}
+                                    onClick={() => imageName.current.value = ""} />
+                                <InputGroup className="mt-2">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>OR</InputGroupText>
                                     </InputGroupAddon>
 
                                     <Input
                                         type="text"
-                                        name="imageUrl"
-                                        id="imageUrl" />
-                                </InputGroup> */}
+                                        name="imageName"
+                                        id="imageName"
+                                        innerRef={imageName}
+                                        placeholder="Input an Image URL"
+                                        onChange={previewImageName} />
+                                </InputGroup>
                             </FormGroup>
                             <FormGroup>
-                                {/* {
+                                {
                                     imagePreview === null ?
                                         <Alert color="dark">No image provided.</Alert>
                                         : <img src={imagePreview} alt="preview" className="img-thumbnail" />
-                                } */}
+                                }
                             </FormGroup>
                             <FormGroup>
                                 <Label for="categoryId">Category</Label>
@@ -186,7 +188,7 @@ const ConditionForm = () => {
                             </FormGroup>
 
                         </Form>
-                        <Button color="info" onClick={submit}>
+                        <Button color="info" type="submit" onClick={submit}>
                             SUBMIT
                         </Button>
                         <Button color="info"

@@ -44,6 +44,7 @@ const CategoryList = (props) => {
                     ))}
                 </Table>
             </div>
+            
 
 
 

@@ -5,12 +5,12 @@ import Honey from '../Images/Honey.png'
 const ConditionCardHome = (props) => {
     //Set the image into state so it can be updated if it returns broken
     const [image, setImage] = useState(props.condition.imageLocation)
-    const { getImageUrl } = useContext(ImageContext)
+    const { getImageName } = useContext(ImageContext)
 
     useEffect(() => {
         if (props.condition.imageLocation !== "" && props.condition.imageLocation !== undefined && props.condition.imageLocation !== null) {
             if (props.condition.imageLocation[0].toLowerCase() !== "h") {
-                setImage(getImageUrl(props.condition.imageLocation))
+                setImage(getImageName(props.condition.imageLocation))
             }
         }
     }, [])

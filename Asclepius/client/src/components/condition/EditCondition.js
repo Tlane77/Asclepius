@@ -19,7 +19,7 @@ const EditCondition = () => {
     const [condition, setCondition] = useState();
     const title = useRef();
     const content = useRef();
-    const imageUrl = useRef();
+    const imageName = useRef();
     const history = useHistory();
     const { conditionId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
@@ -92,17 +92,17 @@ const EditCondition = () => {
                                         name="file"
                                         id="imageUpload"
                                         defaultValue=""
-                                        innerRef={imageUrl}
+                                        innerRef={imageName}
                                     />
                                     <InputGroup className="mt-2">
 
 
                                         <Input
                                             type="text"
-                                            name="imageUrl"
-                                            id="imageUrl" />
+                                            name="imageName"
+                                            id="imageName" />
                                         defaultValue=""
-                                        innerRef={imageUrl}
+                                        innerRef={imageName}
                                     </InputGroup>
                                 </FormGroup>
 

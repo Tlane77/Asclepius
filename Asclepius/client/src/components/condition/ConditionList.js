@@ -2,6 +2,8 @@ import React, { useContext, useEffect, } from "react";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory, Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
+import { ListGroup, ListGroupItem, Card, Row, Col, CardImg, CardBody, CardTitle, CardSubtitle, Container } from "reactstrap";
+
 
 
 const ConditionList = () => {
@@ -21,6 +23,7 @@ const ConditionList = () => {
                         onClick={() => { history.push(`/add/`) }}>
                         Add a Condition
                     </Button>
+
                     <Table>
 
                         <thead>
@@ -35,7 +38,7 @@ const ConditionList = () => {
                             <tbody key={condition.id}>
                                 <tr>
                                     <th scope="row">
-                                        <Link to={`/conditions/${condition.id}`}>
+                                        <Link to={`/conditions/details/${condition.id}`}>
                                             {condition.title}
                                         </Link>
                                     </th>
@@ -44,6 +47,7 @@ const ConditionList = () => {
                                     </td>
                                     <td>{condition.category.name}</td>
                                 </tr>
+
                             </tbody>
                         ))}
                     </Table>
