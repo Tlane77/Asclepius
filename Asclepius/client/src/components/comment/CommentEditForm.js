@@ -27,7 +27,7 @@ const CommentEditForm = () => {
         {
             id: comment.id,
             userProfileId: comment.userProfileId,
-            postId: comment.conditionId,
+            conditionId: comment.conditionId,
             subject: comment.subject,
             content: comment.content,
             createDateTime: comment.createDateTime

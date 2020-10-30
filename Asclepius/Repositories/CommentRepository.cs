@@ -40,7 +40,7 @@ namespace Asclepius.Repositories
                         comments.Add(new Comment()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
-                            ConditionId = DbUtils.GetInt(reader, "PostId"),
+                            ConditionId = DbUtils.GetInt(reader, "ConditionId"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                             Subject = DbUtils.GetString(reader, "Subject"),
                             Content = DbUtils.GetString(reader, "Content"),
@@ -100,7 +100,7 @@ namespace Asclepius.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT c.Id, c.PostId, c.UserProfileId, c.Subject, c.Content, c.CreateDateTime, up.FirstName, up.LastName
+                        SELECT c.Id, c.ConditionId, c.UserProfileId, c.Subject, c.Content, c.CreateDateTime, up.FirstName, up.LastName
                         FROM Comment c
                         LEFT JOIN UserProfile up on c.UserProfileId = up.Id
                         WHERE c.Id = @id
@@ -145,7 +145,7 @@ namespace Asclepius.Repositories
                                         OUTPUT INSERTED.id
                                         VALUES (@ConditionId, @UserProfileId, @Subject, @Content, @CreateDateTime);";
 
-                    DbUtils.AddParameter(cmd, "@PostId", comment.ConditionId);
+                    DbUtils.AddParameter(cmd, "@ConditionId", comment.ConditionId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", comment.UserProfileId);
                     DbUtils.AddParameter(cmd, "@Subject", comment.Subject);
                     DbUtils.AddParameter(cmd, "@Content", comment.Content);
@@ -166,7 +166,7 @@ namespace Asclepius.Repositories
                 {
                     cmd.CommandText = @"
                                         UPDATE Comment
-                                        SET Conditiond = @ConditionId,
+                                        SET ConditionId = @ConditionId,
                                             UserProfileId = @UserProfileId,
                                             Subject = @Subject,
                                             Content = @Content,

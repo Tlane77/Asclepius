@@ -17,9 +17,10 @@ const ConditionList = () => {
     return (
         <>
 
-            <div className="container">
+            <div className="container mt-4">
                 <div className="row justify-content-left">
-                    <Button color="danger"
+
+                    <Button type="button" class="btn btn-outline-warning" color="warning"
                         onClick={() => { history.push(`/add/`) }}>
                         Add a Condition
                     </Button>

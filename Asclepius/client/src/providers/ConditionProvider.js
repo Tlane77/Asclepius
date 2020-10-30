@@ -62,11 +62,20 @@ export const ConditionProvider = (props) => {
                 body: JSON.stringify(condition),
             }));
 
+    const deleteCondition = (id) =>
+        getToken().then((token) =>
+            fetch(`/api/condition/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }));
 
 
 
     return (
-        <ConditionContext.Provider value={{ condition, conditions, setCondition, setConditions, getAllConditions, addCondition, EditCondition, getSingleCondition }}>
+        <ConditionContext.Provider value={{ condition, conditions, setCondition, setConditions, getAllConditions, addCondition, EditCondition, getSingleCondition, deleteCondition }}>
             {props.children}
         </ConditionContext.Provider>
     );

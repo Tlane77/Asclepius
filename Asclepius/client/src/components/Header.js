@@ -19,8 +19,8 @@ export default function Header() {
 
     return (
         <div>
-            <Navbar color="light" light expand="ml-lg-auto">
-                <NavbarBrand tag={RRNavLink} to="/"><strong>Asclepius</strong></NavbarBrand>
+            <Navbar color="light" light expand="md">
+                <NavbarBrand tag={RRNavLink} to="/"><strong>⚕️ Asclepius</strong></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
@@ -61,14 +61,11 @@ export default function Header() {
                                 </NavItem>
                             </>
                         }
-                    </Nav>
 
-
-                    <Nav navbar>
                         <NavItem>
                             <a aria-current="page" className="nav-link"
                                 href="https://www.youtube.com/watch?v=t56lpSJ2GXQ"
-                                target="_new">Welcome to Asclepius</a>
+                                target="_new">▶️Welcome to Asclepius</a>
                         </NavItem>
 
 

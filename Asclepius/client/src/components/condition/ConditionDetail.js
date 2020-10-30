@@ -25,11 +25,9 @@ const ConditionDetail = () => {
     useEffect(() => {
 
         getSingleCondition(id)
-        console.log("singleCondition", id)
+       
     }, []);
-    console.log("singleCondition", id)
-
-
+    
 
 
 

@@ -51,12 +51,12 @@ export default function ApplicationViews() {
         {/* Start of Condition Routes */}
         <Route path="/conditions" exact>
           {isLoggedIn ? <ConditionList /> : <Redirect to="/login" />}
-          {/* {isLoggedIn ? <ConditionList /> : <ConditionList />} */}
+         
         </Route>
 
         <Route path="/add" exact>
           {isLoggedIn ? <ConditionForm /> : <Redirect to="/login" />}
-          {/* {isLoggedIn ? <ConditionForm /> : <ConditionForm />} */}
+         
         </Route>
 
 

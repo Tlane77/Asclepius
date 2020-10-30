@@ -8,22 +8,46 @@ import {
     Input,
     Button,
     InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Alert
 
 } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
+import { CategoryContext } from "../../providers/CategoryProvider";
+import { ImageContext } from "../../providers/ImageProvider";
 import { useHistory, useParams } from "react-router-dom";
 
 
 const EditCondition = () => {
     const { EditCondition, getSingleCondition } = useContext(ConditionContext);
     const [condition, setCondition] = useState();
-    const title = useRef();
-    const content = useRef();
-    const imageName = useRef();
+    const { categories, getAllCategories } = useContext(CategoryContext);
+    const { uploadImage } = useContext(ImageContext);
+    const [categoryId, setCategoryId] = useState(0);
     const history = useHistory();
     const { conditionId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
+    const title = useRef();
+    const content = useRef();
+    const imageName = useRef();
 
+    useEffect(() => {
+        getAllCategories()
+    }, []);
+
+    const previewImage = evt => {
+        if (evt.target.files.length) {
+            setImagePreview(URL.createObjectURL(evt.target.files[0]));
+        }
+    };
+
+    const previewImageUrl = evt => {
+        if (evt.target.value.length) {
+            setImagePreview(evt.target.value);
+        }
+    }
 
 
     const submit = event => {
@@ -33,6 +57,7 @@ const EditCondition = () => {
             id: condition.id,
             title: title.current.value,
             content: content.current.value,
+            categoryId,
 
         }
         updatedCondition.categoryId = JSON.parse(updatedCondition.categoryId)
@@ -45,9 +70,53 @@ const EditCondition = () => {
         if (updatedCondition.categoryId === 0) {
             updatedCondition.categoryId = condition.categoryId
         }
+
+        const file = document.querySelector('input[type="file"]').files[0];
+        let newImageName = ""
+        if (file !== undefined) {
+            const fileType = file.name.split('.').pop();
+
+            const availFileTypes = [
+                'png',
+                'bmp',
+                'jpeg',
+                'jpg',
+                'gif',
+                'PNG',
+                'BMP',
+                'JPEG',
+                'GIF',
+                'JPG'
+            ];
+
+            if (!availFileTypes.includes(fileType)) {
+                alert('Accepted Image File Types: .png, .bmp, .jpeg, .jpg, and .gif');
+                return;
+            }
+            else {
+                const newImageName = `${new Date().getTime()}.${fileType}`;
+
+                const formData = new FormData();
+                formData.append('file', file, newImageName);
+
+                uploadImage(formData, newImageName);
+                updatedCondition.imageLocation = newImageName;
+            }
+        }
+        else if (file === undefined && imageName.current.value !== "") {
+            updatedCondition.imageLocation = imageName.current.value;
+        }
+        else {
+            updatedCondition.imageLocation = condition.imageLocation;
+        }
+
+
+
         EditCondition(updatedCondition)
             .then(() => history.push(`/conditions/${condition.id}`));
-    };
+
+
+    }
 
 
     useEffect(() => {
@@ -60,6 +129,7 @@ const EditCondition = () => {
     if (!condition) {
         return null;
     }
+
 
     if (condition.userProfileId === JSON.parse(sessionStorage.getItem("userProfile")).id) {
         return (
@@ -92,18 +162,48 @@ const EditCondition = () => {
                                         name="file"
                                         id="imageUpload"
                                         defaultValue=""
-                                        innerRef={imageName}
+                                        onChange={e => previewImage(e)}
+                                        onClick={() => imageName.current.value = ""}
                                     />
                                     <InputGroup className="mt-2">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>OR</InputGroupText>
+                                        </InputGroupAddon>
 
 
                                         <Input
                                             type="text"
                                             name="imageName"
-                                            id="imageName" />
-                                        defaultValue=""
-                                        innerRef={imageName}
+                                            id="imageName"
+                                            innerRef={imageName}
+                                            placeholder="Input an Image URL"
+                                            defaultValue={condition.imageLocation !== null ? (condition.imageLocation.startsWith("http") ? condition.imageLocation : "") : ""}
+                                            onChange={previewImageUrl}
+                                        />
                                     </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                    {
+                                        imagePreview === null ?
+                                            <Alert color="light">No new image provided.</Alert>
+                                            : <img src={imagePreview} alt="preview" className="img-thumbnail" />
+                                    }
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label for="categoryId">category</Label>
+                                    <select defaultValue=""
+                                        name="categoryId"
+                                        id="categoryId"
+                                        className="form-control"
+                                        onChange={(e) => setCategoryId(e.target.value)}>
+
+                                        <option defaultValue={condition.categoryId} hidden>{condition.category.name}</option>
+                                        {categories.map(e => (
+                                            <option key={e.id} value={e.id}>
+                                                {e.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </FormGroup>
 
 
@@ -131,6 +231,6 @@ const EditCondition = () => {
             <h1>Submission Error</h1>
         )
     }
-};
 
+};
 export default EditCondition;

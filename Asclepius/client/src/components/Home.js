@@ -15,7 +15,7 @@ const Home = () => {
 
     return (
         <div className="Home">
-            <div className="logo_Side">
+            <div className="homepage_img">
 
 
             </div>

@@ -2,18 +2,26 @@ import React, { useEffect, useContext, useState } from "react";
 import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useParams, useHistory, Link } from "react-router-dom";
+import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 
 const DeleteCondition = () => {
-    const [condition, setCondition] = useState();
+    const [condition, setCondition] = useState({});
     const { getSingleCondition, DeleteCondition } = useContext(ConditionContext);
     const { conditionId } = useParams();
     const history = useHistory();
+    const { userProfile } = useContext(UserProfileContext);
 
 
     useEffect(() => {
-        getSingleCondition(conditionId).then(setCondition);
-    }, []);
+        getSingleCondition(conditionId)
+    }, [])
+
+    useEffect(() => {
+        setCondition(condition)
+    }, [condition])
+
+
 
     if (!condition) {
         return null;
@@ -42,7 +50,7 @@ const DeleteCondition = () => {
                                 })
                         }
                         }
-                    >Yes, this is no valid information anymore!
+                    >Yes, this is not valid information anymore!
                 </Button>
                 </CardBody>
             </Card>
