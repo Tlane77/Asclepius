@@ -15,12 +15,12 @@ export default function Header() {
     const { isLoggedIn, logout } = useContext(UserProfileContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const { users, auser, getAllUsers, currentUser, getUserById, getCurrentUser } = useContext(UserProfileContext);
+    const { users, anyuser, getAllUsers, currentUser, getUserById, getCurrentUser } = useContext(UserProfileContext);
 
     return (
         <div>
             <Navbar color="light" light expand="md">
-                <NavbarBrand tag={RRNavLink} to="/">Asclepius</NavbarBrand>
+                <NavbarBrand tag={RRNavLink} to="/"><strong>⚕️ Asclepius</strong></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
@@ -45,6 +45,10 @@ export default function Header() {
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/add">Add Condition</NavLink>
                                 </NavItem>
+
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/category">Categories</NavLink>
+                                </NavItem>
                                 <NavItem>
                                     <a aria-current="page" className="nav-link"
                                         style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
@@ -61,14 +65,11 @@ export default function Header() {
                                 </NavItem>
                             </>
                         }
-                    </Nav>
 
-
-                    <Nav navbar>
                         <NavItem>
                             <a aria-current="page" className="nav-link"
                                 href="https://www.youtube.com/watch?v=t56lpSJ2GXQ"
-                                target="_new">Welcome to Asclepius</a>
+                                target="_new">▶️Welcome to Asclepius</a>
                         </NavItem>
 
 

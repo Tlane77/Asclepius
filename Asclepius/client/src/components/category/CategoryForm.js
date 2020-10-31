@@ -4,7 +4,7 @@ import { Form, FormGroup, Label, Input, Button, Row } from "reactstrap";
 import { CategoryContext } from "../../providers/CategoryProvider";
 
 export default function CategoryForm() {
-    const [nameText, setNameText] = useState();
+    const [nameText, setNameText] = useState("");
     const history = useHistory();
     const { addCategory } = useContext(CategoryContext);
 

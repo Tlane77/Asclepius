@@ -105,7 +105,7 @@ namespace Asclepius.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE Post
+                        UPDATE Condition
                         SET CategoryId = 10
                         WHERE CategoryId = @id
                                        ";

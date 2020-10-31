@@ -12,5 +12,8 @@ namespace Asclepius.Repositories
 
         void Update(Condition condition);
 
+        void DeleteCondition(int id);
+
+        List<Condition> GetAllUserConditions(int UPID);
     }
 }

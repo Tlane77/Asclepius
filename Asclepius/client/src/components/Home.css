@@ -1,10 +1,8 @@
-/* const styles = {
-    container: {
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        width: '100vw',
-        height: '100vh'
-    }
-}; */
+.homepage_img{
+    background-image: url("../images/Asclepius.png");
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    height: 100vh;
+    box-shadow: 10px 10px 5px grey;
+}

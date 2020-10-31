@@ -21,17 +21,20 @@ import { ImageContext } from "../../providers/ImageProvider";
 
 
 const ConditionForm = () => {
+    const { EditCondition, getSingleCondition } = useContext(ConditionContext);
+    const [post, setPost] = useState();
     const { addCondition } = useContext(ConditionContext);
     const [categoryId, setCategoryId] = useState(0);
     const { categories, getAllCategories } = useContext(CategoryContext);
     const history = useHistory();
     const title = useRef();
     const content = useRef();
-    const imageUrl = useRef();
+    const imageName = useRef();
     const [imagePreview, setImagePreview] = useState(null);
     const [imageLocation, setImageLocation] = useState("");
     const { uploadImage } = useContext(ImageContext);
     const [isLoading, setIsLoading] = useState(false);
+
 
 
     useEffect(() => {
@@ -44,21 +47,13 @@ const ConditionForm = () => {
         }
     };
 
-    const previewImageUrl = evt => {
+    const previewImageName = evt => {
         if (evt.target.value.length) {
             setImagePreview(evt.target.value);
         }
     }
 
-    // const handleFieldChange = evt => {
-    //     const stateToChange = { ...condition }
-    //     stateToChange[evt.target.id] = evt.target.value
-    //     setCondition(stateToChange)
-    // }
 
-    // const handleImgChange = e => {
-    //     setFile(e.target.files[0]);
-    // }
 
 
 
@@ -69,9 +64,12 @@ const ConditionForm = () => {
             title: title.current.value,
             content: content.current.value,
             categoryId,
-            userProfileId: JSON.parse(sessionStorage.getItem("userProfile")).id
+
         };
+
+
         condition.categoryId = JSON.parse(condition.categoryId)
+
         if (condition.title === "") {
             window.alert("Please Add Title")
         }
@@ -81,7 +79,7 @@ const ConditionForm = () => {
         if (condition.categoryId === 0) {
             window.alert("Please Select A Category")
         }
-        // Image Upload
+        //     // Image Upload
         const file = document.querySelector('input[type="file"]').files[0];
 
         if (file !== undefined) {
@@ -113,17 +111,19 @@ const ConditionForm = () => {
                 condition.imageLocation = newImageName;
             }
         }
-        else if (file === undefined && imageUrl.current.value !== "") {
-            condition.imageLocation = imageUrl.current.value;
+
+        else if (file === undefined && imageName.current.value == "") {///Removed ! to test-tl
+            condition.imageLocation = imageName.current.value;
         }
 
         if (condition.title !== "" && condition.content !== "" && condition.categoryId !== 0) {
-            addCondition().then((res) => {
-                history.push(`/conditions/${res.id}`);
+            addCondition(condition).then((condition) => {
+                history.push(`/conditions`);
             });
         }
 
     };
+
 
     return (
         <div className="container pt-4">
@@ -137,6 +137,8 @@ const ConditionForm = () => {
                                 <Input
                                     id="title"
                                     innerRef={title}
+
+
                                 />
                             </FormGroup>
 
@@ -146,13 +148,14 @@ const ConditionForm = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="imageUpload">Upload an Image</Label>
+                                <Label for="imageUpload">Upload an File</Label>
                                 <Input
                                     type="file"
                                     name="file"
                                     id="imageUpload"
+
                                     onChange={previewImage}
-                                    onClick={() => imageUrl.current.value = ""} />
+                                    onClick={() => imageName.current.value = ""} />
                                 <InputGroup className="mt-2">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>OR</InputGroupText>
@@ -160,8 +163,11 @@ const ConditionForm = () => {
 
                                     <Input
                                         type="text"
-                                        name="imageUrl"
-                                        id="imageUrl" />
+                                        name="imageName"
+                                        id="imageName"
+                                        innerRef={imageName}
+                                        placeholder="Input an Image URL"
+                                        onChange={previewImageName} />
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
@@ -184,7 +190,7 @@ const ConditionForm = () => {
                             </FormGroup>
 
                         </Form>
-                        <Button color="info" onClick={submit}>
+                        <Button color="info" type="submit" onClick={submit}>
                             SUBMIT
                         </Button>
                         <Button color="info"
@@ -197,5 +203,6 @@ const ConditionForm = () => {
         </div>
     );
 };
+
 
 export default ConditionForm;

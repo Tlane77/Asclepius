@@ -2,23 +2,32 @@ import React, { useEffect, useContext, useState } from "react";
 import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useParams, useHistory, Link } from "react-router-dom";
+import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 
 const DeleteCondition = () => {
-    const [condition, setCondition] = useState();
-    const { getSingleCondition, DeleteCondition } = useContext(ConditionContext);
+   
+    const { getSingleCondition, DeleteCondition, condition } = useContext(ConditionContext);
     const { conditionId } = useParams();
     const history = useHistory();
+    const { userProfile } = useContext(UserProfileContext);
+    const [conditionToDelete, setConditionToDelete] = useState({});
 
+    // const handleDeleteCondition = (e) => {
+    //     e.preventDefault();
+    //     DeleteCondition(conditionToDelete.conditionId)
+    // }
 
     useEffect(() => {
-        getSingleCondition(conditionId).then(setCondition);
-    }, []);
+        getSingleCondition(conditionId)
+    }, [])
+
+
+
 
     if (!condition) {
         return null;
     }
-
     if (condition.userProfileId === JSON.parse(sessionStorage.getItem("userProfile")).id) {
 
 
@@ -30,7 +39,7 @@ const DeleteCondition = () => {
                 <CardBody>
                     <Button color="info"
                         style={{ margin: 10 }}
-                        onClick={() => { history.push(`/conditions/${conditionId}`) }}>
+                        onClick={() => { history.push(`/conditions`) }}>
                         Not at this Moment
                 </Button>
                     <Button color="danger"
@@ -38,11 +47,11 @@ const DeleteCondition = () => {
                         onClick={() => {
                             DeleteCondition(conditionId)
                                 .then(() => {
-                                    history.push(`/conditions/`)
+                                    history.push(`/conditions`)
                                 })
                         }
                         }
-                    >Yes, this is no valid information anymore!
+                    >Yes, this is not valid information anymore!
                 </Button>
                 </CardBody>
             </Card>

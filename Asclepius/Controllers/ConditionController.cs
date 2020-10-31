@@ -11,6 +11,7 @@ using Asclepius.Repositories;
 
 namespace Asclepius.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConditionController : ControllerBase
@@ -18,10 +19,13 @@ namespace Asclepius.Controllers
         private readonly IConditionRepository _conditionRepository;
         private readonly IUserProfileRepository _userProfileRepository;
 
+       
         public ConditionController(IConditionRepository conditionRepository, IUserProfileRepository userProfileRepository)
         {
             _conditionRepository = conditionRepository;
-           
+            _userProfileRepository = userProfileRepository;
+
+
         }
 
         //GRAB ALL THE CONDITIONS 
@@ -34,6 +38,7 @@ namespace Asclepius.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+
             var condition = _conditionRepository.GetConditionById(id);
             if (condition == null)
             {
@@ -48,8 +53,9 @@ namespace Asclepius.Controllers
         {
             var currentUserProfile = GetCurrentUserProfile();
             condition.UserProfileId = currentUserProfile.Id;
+            condition.CreateDateTime = DateTime.Now;
             _conditionRepository.Add(condition);
-            return CreatedAtAction("Get", new { id = condition.Id }, condition);
+            return Ok(CreatedAtAction("Get", new { id = condition.Id }, condition));
         }
 
        
@@ -68,7 +74,7 @@ namespace Asclepius.Controllers
                 }
                 condition.UserProfileId = conditionFromDB.UserProfileId;
                 condition.CreateDateTime = conditionFromDB.CreateDateTime;
-          
+
                 _conditionRepository.Update(condition);
 
                 return Ok();
@@ -78,6 +84,24 @@ namespace Asclepius.Controllers
                 return Unauthorized();
             }
 
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var condition = _conditionRepository.GetConditionById(id);
+
+            if (condition.UserProfileId == currentUserProfile.Id)
+            {
+                _conditionRepository.DeleteCondition(id);
+                return NoContent();
+            }
+
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         private UserProfile GetCurrentUserProfile()

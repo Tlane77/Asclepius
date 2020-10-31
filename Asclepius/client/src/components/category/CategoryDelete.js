@@ -34,7 +34,7 @@ const CategoryDelete = () => {
                     <Row >
                         <Button
                             className="deleteCategoryButton"
-                            color="danger"
+                            color="warning"
                             onClick={handleDelete}>
                             Delete</Button>
                         <Button type="button"
