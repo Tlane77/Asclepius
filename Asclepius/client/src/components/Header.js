@@ -45,6 +45,10 @@ export default function Header() {
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="/add">Add Condition</NavLink>
                                 </NavItem>
+
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/category">Categories</NavLink>
+                                </NavItem>
                                 <NavItem>
                                     <a aria-current="page" className="nav-link"
                                         style={{ cursor: "pointer" }} onClick={logout}>Logout</a>

@@ -51,16 +51,16 @@ export default function ApplicationViews() {
         {/* Start of Condition Routes */}
         <Route path="/conditions" exact>
           {isLoggedIn ? <ConditionList /> : <Redirect to="/login" />}
-         
+
         </Route>
 
         <Route path="/add" exact>
           {isLoggedIn ? <ConditionForm /> : <Redirect to="/login" />}
-         
+
         </Route>
 
 
-        <Route path="/conditions/edit/:conditionId(\d+)" exact>
+        <Route path="/conditions/edit/:conditionId" exact>
           {isLoggedIn ? <EditCondition /> : <Redirect to="/login" />}
         </Route>
 
@@ -68,7 +68,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <ConditionDetail /> : <Redirect to="/login" />}
         </Route>
 
-        <Route path="/conditions/delete/:id" exact>
+        <Route path="/conditions/delete/:conditionId" exact>
           {isLoggedIn ? <DeleteCondition /> : <Redirect to="/login" />}
         </Route>
 

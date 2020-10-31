@@ -19,15 +19,20 @@ const ConditionDetail = () => {
     const history = useHistory();
     const { userProfile } = useContext(UserProfileContext);
     const { activeUser } = useContext(UserProfileContext);
-   
+
 
 
     useEffect(() => {
 
         getSingleCondition(id)
-       
+
     }, []);
-    
+
+    // useEffect(() => {
+    //     getImageName(id)
+    // }, []);
+
+   
 
 
 
@@ -52,19 +57,19 @@ const ConditionDetail = () => {
     //});
 
 
-    //formated publication date to MM / DD / YYYY
+    //formated create date to MM / DD / YYYY
 
 
 
     const createDate = () => {
         if (condition != undefined) { new Date(condition.createDateTime) }
     }
-    // const formatedDate = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
+     //const createDateTime = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
 
 
-     if (condition.userProfile == undefined) {
-         return null;
-     }
+    if (condition.userProfile == undefined) {
+        return null;
+    }
     return (
         <div className="conditionDetailsCardContainer">
             <Card className="m-auto">
@@ -82,6 +87,7 @@ const ConditionDetail = () => {
                     :
                     <CardImg top src={imageName} alt={condition.title} />
                 }
+
                 <CardBody>
                     <p style={{ whiteSpace: "pre-wrap" }}>{condition.content}</p>
                     <p>{condition.createDateTime}</p>
@@ -116,23 +122,6 @@ const ConditionDetail = () => {
                 </Button >}
                 </CardBody >
 
-                <CardBody>
-                    {/* <Row>
-                        <Col sm="4">
-                            {window.location.href == "http://localhost:3000/condition" ?
-                                <NavLink to={`condition/details/${condition.id}`}><Button >Details</Button></NavLink> : <NavLink to={`details/${condition.id}`}><Button >Details</Button></NavLink>}
-                            <CommentList />
-                        </Col>
-                        <Col sm="4">
-                            {window.location.href == "http://localhost:3000/condition" ?
-                                <NavLink to={`condition/edit/${condition.id}`}><Button>Edit Condition</Button></NavLink> : <NavLink to={`edit/${condition.id}`}><Button>Edit Condition</Button></NavLink>}
-                        </Col>
-                        <Col sm="4">
-                            {window.location.href == "http://localhost:3000/condition" ?
-                                <NavLink to={`condition/delete/${condition.id}`}><Button>Delete Condition</Button></NavLink> : <NavLink to={`delete/${condition.id}`}><Button>Delete Condition</Button></NavLink>}
-                        </Col>
-                    </Row> */}
-                </CardBody>
 
             </Card >
         </div>

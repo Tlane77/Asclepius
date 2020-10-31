@@ -38,6 +38,7 @@ namespace Asclepius.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+
             var condition = _conditionRepository.GetConditionById(id);
             if (condition == null)
             {
@@ -83,6 +84,24 @@ namespace Asclepius.Controllers
                 return Unauthorized();
             }
 
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            var condition = _conditionRepository.GetConditionById(id);
+
+            if (condition.UserProfileId == currentUserProfile.Id)
+            {
+                _conditionRepository.DeleteCondition(id);
+                return NoContent();
+            }
+
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         private UserProfile GetCurrentUserProfile()

@@ -14,5 +14,9 @@
     <Folder Include="client\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Image.csproj" />
+  </ItemGroup>
+
 
 </Project>

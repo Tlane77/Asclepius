@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { CategoryContext } from "../../providers/CategoryProvider";
+import { CommentContext } from "../../providers/CommentProvider";
 import { ImageContext } from "../../providers/ImageProvider";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -120,11 +121,9 @@ const EditCondition = () => {
 
 
     useEffect(() => {
-        getSingleCondition(conditionId).then((res) => {
-            setCondition(res)
-            setIsLoading(false);
-        });
-    }, []);
+        getSingleCondition(conditionId)
+    }, [])
+
 
     if (!condition) {
         return null;

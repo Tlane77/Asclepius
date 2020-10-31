@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { CommentContext } from "../../providers/CommentProvider";
+import { ConditionContext } from "../../providers/ConditionProvider";
 import Comment from "./Comment";
 import { useParams, Link } from 'react-router-dom';
 
