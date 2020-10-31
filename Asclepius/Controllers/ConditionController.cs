@@ -11,7 +11,7 @@ using Asclepius.Repositories;
 
 namespace Asclepius.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConditionController : ControllerBase
@@ -74,7 +74,7 @@ namespace Asclepius.Controllers
                 }
                 condition.UserProfileId = conditionFromDB.UserProfileId;
                 condition.CreateDateTime = conditionFromDB.CreateDateTime;
-          
+
                 _conditionRepository.Update(condition);
 
                 return Ok();

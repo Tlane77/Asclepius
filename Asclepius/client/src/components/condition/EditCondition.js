@@ -21,8 +21,8 @@ import { useHistory, useParams } from "react-router-dom";
 
 
 const EditCondition = () => {
-    const { EditCondition, getSingleCondition } = useContext(ConditionContext);
-    const [condition, setCondition] = useState();
+    const { EditCondition, getSingleCondition, condition } = useContext(ConditionContext);
+    const [editCondition, setEditCondition] = useState();
     const { categories, getAllCategories } = useContext(CategoryContext);
     const { uploadImage } = useContext(ImageContext);
     const [categoryId, setCategoryId] = useState(0);
@@ -114,7 +114,7 @@ const EditCondition = () => {
 
 
         EditCondition(updatedCondition)
-            .then(() => history.push(`/conditions/${condition.id}`));
+            .then(() => history.push(`/conditions/details/${conditionId}`));
 
 
     }
@@ -124,6 +124,7 @@ const EditCondition = () => {
         getSingleCondition(conditionId)
     }, [])
 
+    console.log("condition", condition)
 
     if (!condition) {
         return null;
@@ -131,104 +132,109 @@ const EditCondition = () => {
 
 
     if (condition.userProfileId === JSON.parse(sessionStorage.getItem("userProfile")).id) {
+
         return (
-            <div className="container pt-4">
-                <div className="row justify-content-center">
-                    <Card className="col-sm-12 col-lg-6">
-                        <CardBody>
-                            <Form>
-                                <FormGroup>
-                                    <Label for="title">Title</Label>
-                                    <Input
-                                        id="title"
-                                        defaultValue={condition.title}
-                                        innerRef={title}
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="content">Content</Label>
-                                    <Input
-                                        id="content"
-                                        type="textarea"
-                                        rows="10"
-                                        defaultValue={condition.content}
-                                        innerRef={content} />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="imageUpload">Upload an Image</Label>
-                                    <Input
-                                        type="file"
-                                        name="file"
-                                        id="imageUpload"
-                                        defaultValue=""
-                                        onChange={e => previewImage(e)}
-                                        onClick={() => imageName.current.value = ""}
-                                    />
-                                    <InputGroup className="mt-2">
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>OR</InputGroupText>
-                                        </InputGroupAddon>
+            <>
 
-
+                <div className="container pt-4">
+                    <div className="row justify-content-center">
+                        <Card className="col-sm-12 col-lg-6">
+                            <CardBody>
+                                <Form>
+                                    <FormGroup>
+                                        <Label for="title">Title</Label>
                                         <Input
-                                            type="text"
-                                            name="imageName"
-                                            id="imageName"
-                                            innerRef={imageName}
-                                            placeholder="Input an Image URL"
-                                            defaultValue={condition.imageLocation !== null ? (condition.imageLocation.startsWith("http") ? condition.imageLocation : "") : ""}
-                                            onChange={previewImageUrl}
+                                            id="title"
+                                            defaultValue={condition.title}
+                                            innerRef={title}
                                         />
-                                    </InputGroup>
-                                </FormGroup>
-                                <FormGroup>
-                                    {
-                                        imagePreview === null ?
-                                            <Alert color="light">No new image provided.</Alert>
-                                            : <img src={imagePreview} alt="preview" className="img-thumbnail" />
-                                    }
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="categoryId">category</Label>
-                                    <select defaultValue=""
-                                        name="categoryId"
-                                        id="categoryId"
-                                        className="form-control"
-                                        onChange={(e) => setCategoryId(e.target.value)}>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="content">Content</Label>
+                                        <Input
+                                            id="content"
+                                            type="textarea"
+                                            rows="10"
+                                            defaultValue={condition.content}
+                                            innerRef={content} />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="imageUpload">Upload an Image</Label>
+                                        <Input
+                                            type="file"
+                                            name="file"
+                                            id="imageUpload"
+                                            defaultValue=""
+                                            onChange={e => previewImage(e)}
+                                            onClick={() => imageName.current.value = ""}
+                                        />
+                                        <InputGroup className="mt-2">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>OR</InputGroupText>
+                                            </InputGroupAddon>
 
-                                        <option defaultValue={condition.categoryId} hidden>{condition.category.name}</option>
-                                        {categories.map(e => (
-                                            <option key={e.id} value={e.id}>
-                                                {e.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </FormGroup>
+
+                                            <Input
+                                                type="text"
+                                                name="imageName"
+                                                id="imageName"
+                                                innerRef={imageName}
+                                                placeholder="Input an Image URL"
+                                                defaultValue={condition.imageLocation !== null ? (condition.imageLocation.startsWith("http") ? condition.imageLocation : "") : ""}
+                                                onChange={previewImageUrl}
+                                            />
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        {
+                                            imagePreview === null ?
+                                                <Alert color="light">No new image provided.</Alert>
+                                                : <img src={imagePreview} alt="preview" className="img-thumbnail" />
+                                        }
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="categoryId">category</Label>
+                                        <select defaultValue=""
+                                            name="categoryId"
+                                            id="categoryId"
+                                            className="form-control"
+                                            onChange={(e) => setCategoryId(e.target.value)}>
+
+                                            <option defaultValue={condition.categoryId} hidden>{condition.category.name}</option>
+                                            {categories.map(e => (
+                                                <option key={e.id} value={e.id}>
+                                                    {e.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </FormGroup>
 
 
-                            </Form>
-                            <Button
-                                color="info"
-                                style={{ margin: 10 }}
-                                disabled={isLoading}
-                                onClick={submit}
-                            >Submit
+                                </Form>
+                                <Button
+                                    color="info"
+                                    style={{ margin: 10 }}
+                                    disabled={isLoading}
+                                    onClick={submit}
+                                >Submit
                                 </Button>
-                            <Button color="info"
-                                style={{ margin: 10 }}
-                                disabled={isLoading}
-                                onClick={() => { history.push(`/conditions/${condition.id}`) }}>
-                                Cancel
+                                <Button color="info"
+                                    style={{ margin: 10 }}
+                                    disabled={isLoading}
+                                    onClick={() => { history.push(`/conditions/${condition.id}`) }}>
+                                    Cancel
                             </Button>
-                        </CardBody>
-                    </Card>
+                            </CardBody>
+                        </Card>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     } else {
         return (
             <h1>Submission Error</h1>
         )
+
     }
 
 };
