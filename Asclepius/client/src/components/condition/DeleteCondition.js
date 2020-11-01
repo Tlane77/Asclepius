@@ -3,7 +3,7 @@ import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button } from "react
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
-
+import "./Condition.css"
 
 const DeleteCondition = () => {
    

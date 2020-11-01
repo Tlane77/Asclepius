@@ -39,7 +39,7 @@ const CommentForm = () => {
                     <CardBody>
                         <Form>
                             <FormGroup>
-                                <Label for="conditionId">New Comment</Label>
+                                <Label for="conditionId">📝New Comment</Label>
                                 <Input type="hidden"
                                     id="conditionId"
                                     value={conditionId}

@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 import CommentList from "../Comment/CommentList";
 import { CommentContext, CommentsContext } from "../../providers/CommentProvider";
+import "./Condition.css"
 
 
 const ConditionDetail = () => {
@@ -32,7 +33,7 @@ const ConditionDetail = () => {
     //     getImageName(id)
     // }, []);
 
-   
+
 
 
 
@@ -64,7 +65,7 @@ const ConditionDetail = () => {
     const createDate = () => {
         if (condition != undefined) { new Date(condition.createDateTime) }
     }
-     //const createDateTime = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
+    //const createDateTime = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
 
 
     if (condition.userProfile == undefined) {

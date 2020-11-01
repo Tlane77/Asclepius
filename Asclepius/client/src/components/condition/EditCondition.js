@@ -18,6 +18,7 @@ import { CategoryContext } from "../../providers/CategoryProvider";
 import { CommentContext } from "../../providers/CommentProvider";
 import { ImageContext } from "../../providers/ImageProvider";
 import { useHistory, useParams } from "react-router-dom";
+import "./Condition.css"
 
 
 const EditCondition = () => {
@@ -221,7 +222,7 @@ const EditCondition = () => {
                                 <Button color="info"
                                     style={{ margin: 10 }}
                                     disabled={isLoading}
-                                    onClick={() => { history.push(`/conditions/${condition.id}`) }}>
+                                    onClick={() => { history.push(`/conditions/details/${condition.id}`) }}>
                                     Cancel
                             </Button>
                             </CardBody>

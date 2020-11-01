@@ -3,6 +3,7 @@ import {
     Form,
     FormGroup,
     Card,
+    CardDeck,
     CardBody,
     Label,
     Input,
@@ -17,6 +18,7 @@ import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory } from "react-router-dom";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { ImageContext } from "../../providers/ImageProvider";
+import "./Condition.css"
 
 
 

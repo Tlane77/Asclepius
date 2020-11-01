@@ -28,11 +28,30 @@ export default function Header() {
                         {isLoggedIn &&
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                                    <NavLink tag={RRNavLink} to="/">🏡Home</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/conditions">Condition</NavLink>
+                                    <NavLink tag={RRNavLink} to="/conditions">🩺Condition</NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/covid">Covid
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink
+                                        style={{
+                                            color: "white",
+                                            textDecoration: "none",
+                                            marginTop: "10px",
+                                            marginRight: "40px",
+                                        }}
+                                        to="/graph"
+                                    >
+                                        <li>Graph</li>
+                                    </NavLink>
+                                </NavItem>
+
+
 
 
                             </>
@@ -43,11 +62,11 @@ export default function Header() {
                         {isLoggedIn &&
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/add">Add Condition</NavLink>
+                                    <NavLink tag={RRNavLink} to="/add">🖊️Add Condition</NavLink>
                                 </NavItem>
 
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="/category">Categories</NavLink>
+                                    <NavLink tag={RRNavLink} className="fas fa-user-md" to="/category">Categories</NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <a aria-current="page" className="nav-link"
