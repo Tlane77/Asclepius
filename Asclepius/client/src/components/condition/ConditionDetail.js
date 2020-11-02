@@ -1,25 +1,23 @@
 import React, { useEffect, useContext, useState } from "react";
-import { ListGroup, ListGroupItem, Card, Row, Col, CardImg, CardBody, Button, CardTitle, CardSubtitle, Container } from "reactstrap";
+import { Card, CardImg, CardBody, Button, CardSubtitle, } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { ImageContext } from '../../providers/ImageProvider';
 import { useParams, useHistory, Link } from "react-router-dom";
 import "./Condition.css"
-import { NavLink } from "react-router-dom";
-import { UserProfileContext } from "../../providers/UserProfileProvider";
-import CommentList from "../Comment/CommentList";
-import { CommentContext, CommentsContext } from "../../providers/CommentProvider";
 import "./Condition.css"
 
 
 const ConditionDetail = () => {
     const { getSingleCondition, condition } = useContext(ConditionContext);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isAuthor, setIsAuthor] = useState(false);
+    const [image, setImage] = useState()
+    
+
+
+
     const { getImageName } = useContext(ImageContext);
     const { id } = useParams();
     const history = useHistory();
-    const { userProfile } = useContext(UserProfileContext);
-    const { activeUser } = useContext(UserProfileContext);
+
 
 
 
@@ -29,45 +27,21 @@ const ConditionDetail = () => {
 
     }, []);
 
-    // useEffect(() => {
-    //     getImageName(id)
-    // }, []);
+    useEffect(() => {
+
+        if (condition.imageLocation !== "" && condition.imageLocation !== undefined && condition.imageLocation !== null) {
+            if (condition.imageLocation[0].toLowerCase() !== "h") {
+                setImage(getImageName(condition.imageLocation))
+            }
+            else { setImage(condition.imageLocation) }
+
+        }
+    }, [condition.id])
 
 
 
-
-
-    const imageName = () => {
-        if (condition != undefined) { getImageName(condition.imageLocation) }
-    }
-    // useEffect(() => {
-    //     //verify there condition is not undefined before getting subscriptions
-    //     condition(JSON.parse(sessionStorage.getItem("userProfile")).id, condition.userProfileId)
-    // }, [condition]);
-
-    // useEffect(() => {
-    //     //ensure condition is not undefined
-    //     if (condition) {
-    //         //determine if current use is condition author
-    //         if (JSON.parse(sessionStorage.getItem("userProfile")).id == condition.userProfileId) {
-    //             setIsAuthor(true)
-    //         }
-
-    // }
-
-    //});
-
-
-    //formated create date to MM / DD / YYYY
-
-
-
-    const createDate = () => {
-        if (condition != undefined) { new Date(condition.createDateTime) }
-    }
-    //const createDateTime = `${createDate.getMonth() + 1}/${createDate.getDate()}/${createDate.getFullYear()}`
-
-
+    
+    
     if (condition.userProfile == undefined) {
         return null;
     }
@@ -86,7 +60,7 @@ const ConditionDetail = () => {
                 {condition.imageLocation === "" || condition.imageLocation === null ?
                     <CardImg top />
                     :
-                    <CardImg top src={imageName} alt={condition.title} />
+                    <CardImg top src={image} alt={condition.title} />
                 }
 
                 <CardBody>

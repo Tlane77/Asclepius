@@ -25,7 +25,7 @@ import CommentForm from "./Comment/CommentForm";
 import { CommentProvider } from "../providers/CommentProvider";
 import Covid from './Covid/Covid';
 import CovidGraph from './Covid/CovidGraph';
-import ReactApexChart from "react-apexcharts";
+
 
 
 
@@ -81,11 +81,7 @@ export default function ApplicationViews() {
         </Route>
         {/* End of Condition Routes */}
 
-        {/* Covid Routes */}
 
-        <Route path="/covid">{isLoggedIn ? <Covid /> : <Redirect to="/login" />}</Route>
-
-        <Route path="/graph">{isLoggedIn ? <CovidGraph /> : <Redirect to="/login" />}</Route>
 
         {/* Category Routes */}
         <Route path="/category" exact>
@@ -137,6 +133,12 @@ export default function ApplicationViews() {
         </Route>
 
         {/* End User Profile Routes */}
+
+        {/* Covid Routes */}
+
+        <Route path="/covid">{isLoggedIn ? <Covid /> : <Redirect to="/login" />}</Route>
+
+        <Route path="/graph">{isLoggedIn ? <CovidGraph /> : <Redirect to="/login" />}</Route>
 
         <Route path="/register">
           <Register />

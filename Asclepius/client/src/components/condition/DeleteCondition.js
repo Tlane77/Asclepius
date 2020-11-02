@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
-import { ListGroup, ListGroupItem, Card, CardImg, CardBody, Button } from "reactstrap";
+import {  Card, CardBody, Button } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 import "./Condition.css"
 

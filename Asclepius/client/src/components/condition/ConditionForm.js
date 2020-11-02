@@ -3,7 +3,6 @@ import {
     Form,
     FormGroup,
     Card,
-    CardDeck,
     CardBody,
     Label,
     Input,
@@ -23,8 +22,8 @@ import "./Condition.css"
 
 
 const ConditionForm = () => {
-    const { EditCondition, getSingleCondition } = useContext(ConditionContext);
-    const [post, setPost] = useState();
+    //const { EditCondition, getSingleCondition } = useContext(ConditionContext);
+   
     const { addCondition } = useContext(ConditionContext);
     const [categoryId, setCategoryId] = useState(0);
     const { categories, getAllCategories } = useContext(CategoryContext);
