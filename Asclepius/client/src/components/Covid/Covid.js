@@ -7,10 +7,6 @@ import ReactTooltip from "react-tooltip";
 import RingLoader from "react-spinners/RingLoader";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
-import FormControl from "form-control-react";
-
-
-
 import {
     Card,
     CardDeck,
@@ -21,7 +17,12 @@ import {
     CardFooter,
     Form,
     FormGroup,
+    FormControl
 } from "reactstrap";
+
+
+
+
 
 function Covid() {
     const [latest, setLatest] = useState([]);
@@ -107,7 +108,7 @@ function Covid() {
             </div>
             <br />
             <h2
-                data-tip="Last modified date: 07/01/2020 - v2.2"
+                data-tip="Last modified date: 16/05/2020 - v2.2"
                 style={{ textAlign: "center" }}
             >
                 Asclepius
@@ -118,8 +119,8 @@ function Covid() {
                 <Toggle
                     defaultChecked={false}
                     icons={{
-                        checked: "✅",
-                        unchecked: "⭕",
+                        checked: "🌜",
+                        unchecked: "🌞",
                     }}
                     onChange={handleDarkThemeChange}
                 />
@@ -134,7 +135,7 @@ function Covid() {
                 >
                     <CardBody>
                         <CardTitle>Cases</CardTitle>
-                        <CardText>{latest.cases}</CardText>
+                        {/* <CardText>{latest.cases}</CardText> */}
                         <NumberFormat
                             value={latest.cases}
                             displayType={"text"}
@@ -194,12 +195,12 @@ function Covid() {
             <br />
             <Form>
                 <FormGroup controlId="formGroupSearch">
-                    <FormControl>
+                    <Form.Control
                         bg="dark"
                         type="text"
                         placeholder="Search for countries"
                         onChange={(e) => setSearchCountries(e.target.value)}
-                    </FormControl>
+                    />
                 </FormGroup>
             </Form>
             <Columns queries={queries}>{countries}</Columns>
@@ -207,4 +208,4 @@ function Covid() {
     );
 }
 
-export default Covid;
+export default Covid; 
