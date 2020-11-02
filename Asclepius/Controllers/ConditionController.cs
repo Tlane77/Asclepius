@@ -39,7 +39,7 @@ namespace Asclepius.Controllers
         public IActionResult Get(int id)
         {
 
-            var condition = _conditionRepository.GetConditionById(id);
+            Condition condition = _conditionRepository.GetConditionById(id);
             if (condition == null)
             {
                 return NotFound();

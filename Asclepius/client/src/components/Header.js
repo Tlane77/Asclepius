@@ -56,10 +56,10 @@ export default function Header() {
                                     <NavLink tag={RRNavLink} to="/covid">Covid
                                     </NavLink>
                                 </NavItem> */}
-                                <NavItem>
+                                {/* <NavItem>
                                     <NavLink tag={RRNavLink} to="/graph">Graph
                                     </NavLink>
-                                </NavItem>
+                                </NavItem> */}
 
                                 <NavItem>
                                     <a aria-current="page" className="nav-link"

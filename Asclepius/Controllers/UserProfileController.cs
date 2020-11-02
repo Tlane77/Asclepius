@@ -12,7 +12,7 @@ using Asclepius.Repositories;
 
 namespace Asclepius.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
@@ -23,7 +23,7 @@ namespace Asclepius.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
@@ -35,7 +35,7 @@ namespace Asclepius.Controllers
             return Ok(userProfile);
         }
 
-       // [Authorize]
+       [Authorize]
         [HttpPost]
         public IActionResult Register(UserProfile userProfile)
         {
