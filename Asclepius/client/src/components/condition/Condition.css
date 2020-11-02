@@ -1,3 +1,7 @@
 .container{
     background: linear-gradient(to top, #fffacd 10%, #ffffff 68%);
 }
+
+.image{
+    max-height: 10rem;
+}

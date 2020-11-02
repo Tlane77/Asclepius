@@ -17,12 +17,13 @@ import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory } from "react-router-dom";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { ImageContext } from "../../providers/ImageProvider";
+import "./Condition.css"
 
 
 
 const ConditionForm = () => {
-    const { EditCondition, getSingleCondition } = useContext(ConditionContext);
-    const [post, setPost] = useState();
+    //const { EditCondition, getSingleCondition } = useContext(ConditionContext);
+   
     const { addCondition } = useContext(ConditionContext);
     const [categoryId, setCategoryId] = useState(0);
     const { categories, getAllCategories } = useContext(CategoryContext);

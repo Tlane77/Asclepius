@@ -2,8 +2,7 @@ import React, { useContext, useEffect, } from "react";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { useHistory, Link } from "react-router-dom";
 import { Button, Table } from "reactstrap";
-import { ListGroup, ListGroupItem, Card, Row, Col, CardImg, CardBody, CardTitle, CardSubtitle, Container } from "reactstrap";
-
+import "./Condition.css"
 
 
 const ConditionList = () => {

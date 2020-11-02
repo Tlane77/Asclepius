@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ImageContext } from '../../providers/ImageProvider';
 import Honey from '../Images/Honey.png'
+import "./Condition.css"
 const ConditionCardHome = (props) => {
     //Set the image into state so it can be updated if it returns broken
     const [image, setImage] = useState(props.condition.imageLocation)

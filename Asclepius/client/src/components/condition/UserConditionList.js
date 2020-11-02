@@ -4,6 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import {
     Button, Table
 } from "reactstrap";
+import "./Condition.css"
 
 const UserConditionList = () => {
     const { conditions, getAllUserConditions } = useContext(ConditionContext);

@@ -8,12 +8,11 @@ import "./Comment.css"
 const CommentEditForm = () => {
 
     const { commentId, conditionId } = useParams();
-    const { getCommentById, addComment, editComment } = useContext(CommentContext);
-    const [userProfileId, setUserProfileId] = useState();
+    const { getCommentById, editComment } = useContext(CommentContext);
+    const [userProfileId] = useState();
 
     const history = useHistory();
     const [comment, setComment] = useState({ userProfileId: "", conditionId: "", subject: "", content: "", createDateTime: "" });
-    const [updatedComment, setUpdatedComment] = useState();
     const currentUser = JSON.parse(sessionStorage.getItem('userProfile')).id;
     useEffect(() => {
         getCommentById(commentId).then(setComment);

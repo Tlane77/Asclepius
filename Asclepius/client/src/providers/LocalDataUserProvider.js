@@ -8,6 +8,8 @@ export function LocalDataUserProvider(props) {
     const userFirstName = JSON.parse(sessionStorage.getItem("userProfile")).firstName;
     const userLastName = JSON.parse(sessionStorage.getItem("userProfile")).lastName
     const userFullName = JSON.parse(sessionStorage.getItem("userProfile")).fullName;
+    //const userFirstName = "John";
+    //const userLastName = "Doe";
     const userImageLoc = JSON.parse(sessionStorage.getItem("userProfile")).imageLocation;
     const userDisplayName = JSON.parse(sessionStorage.getItem("userProfile")).displayName;
 

@@ -23,6 +23,9 @@ import CommentEditForm from "./Comment/CommentEditForm";
 import CommentDelete from "./Comment/CommentDelete";
 import CommentForm from "./Comment/CommentForm";
 import { CommentProvider } from "../providers/CommentProvider";
+import Covid from './Covid/Covid';
+import CovidGraph from './Covid/CovidGraph';
+
 
 
 
@@ -43,6 +46,7 @@ export default function ApplicationViews() {
             </LocalDataUserProvider>
             : <Redirect to="/login" />}
         </Route>
+
 
         <Route path="/user_conditions" exact>
           {isLoggedIn ? <UserConditionList /> : <Redirect to="/login" />}
@@ -76,6 +80,8 @@ export default function ApplicationViews() {
           <Login />
         </Route>
         {/* End of Condition Routes */}
+
+
 
         {/* Category Routes */}
         <Route path="/category" exact>
@@ -127,6 +133,12 @@ export default function ApplicationViews() {
         </Route>
 
         {/* End User Profile Routes */}
+
+        {/* Covid Routes */}
+
+        <Route path="/covid">{isLoggedIn ? <Covid /> : <Redirect to="/login" />}</Route>
+
+        <Route path="/graph">{isLoggedIn ? <CovidGraph /> : <Redirect to="/login" />}</Route>
 
         <Route path="/register">
           <Register />

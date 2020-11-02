@@ -7,6 +7,8 @@ import { CategoryProvider } from "./providers/CategoryProvider";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import { ImageProvider } from './providers/ImageProvider';
+import Footer from './Footer';
+
 
 
 
@@ -22,7 +24,7 @@ function App() {
             </CategoryProvider>
           </ConditionProvider>
         </ImageProvider>
-
+        <Footer />
       </UserProfileProvider>
     </Router>
   );
