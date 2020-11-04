@@ -8,7 +8,7 @@ import "./Condition.css"
 import "./Condition.css"
 import DayJS from 'react-dayjs';
 
-
+//UseState is like a snapshot.. SetState is like setting a new version of snapshot.
 
 const ConditionDetail = () => {
     //putting a single condition into state
@@ -17,7 +17,7 @@ const ConditionDetail = () => {
 
 
 
-    //using the getImage funtion the contextProvider from ImageProvider brings in for us.
+    //using the getImage fucntion the contextProvider from ImageProvider brings in for us.
     const { getImageName } = useContext(ImageContext);
     const { id } = useParams();
     const history = useHistory();
