@@ -17,6 +17,13 @@ const UserProfileList = (props) => {
         getAllUsers();
     }, []);
 
+    //const activeUsers = users.filter(user => user)
+
+
+
+    if (currentUser) {
+        return <Spinner className="app-spinner dark" />
+    }
 
     return (
 
@@ -26,8 +33,7 @@ const UserProfileList = (props) => {
                     <h3>Users</h3>
                 </div>
                 <Table>
-
-                    <thead>
+                     <thead>
                         <tr>
                             <th>Username</th>
                             <th>Name</th>

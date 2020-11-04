@@ -34,11 +34,14 @@ export default function ApplicationViews() {
   const { id } = useParams();
 
   return (
-    <main>
+    <main class="container p-3">
+
+      {/* Switch component that is going to look at he url and render the first route that is a match for the route provided. */}
       <Switch>
 
         {/* Local Data */}
 
+        {/* exact means we only want to render this component when it matches exactly / */}
         <Route path="/" exact>
           {isLoggedIn ?
             <LocalDataUserProvider>
@@ -47,16 +50,21 @@ export default function ApplicationViews() {
             : <Redirect to="/login" />}
         </Route>
 
-
+        {/* Start of Condition Routes */}
         <Route path="/user_conditions" exact>
           {isLoggedIn ? <UserConditionList /> : <Redirect to="/login" />}
         </Route>
 
-        {/* Start of Condition Routes */}
+
         <Route path="/conditions" exact>
           {isLoggedIn ? <ConditionList /> : <Redirect to="/login" />}
 
         </Route>
+
+        {/* If a url matches the value of this path attribute
+            the children of that <Route> will be rendered */}
+
+
 
         <Route path="/add" exact>
           {isLoggedIn ? <ConditionForm /> : <Redirect to="/login" />}
@@ -68,6 +76,7 @@ export default function ApplicationViews() {
           {isLoggedIn ? <EditCondition /> : <Redirect to="/login" />}
         </Route>
 
+        {/* the : will tell the react router that this will be some id parameter */}
         <Route path="/conditions/details/:id" exact>
           {isLoggedIn ? <ConditionDetail /> : <Redirect to="/login" />}
         </Route>

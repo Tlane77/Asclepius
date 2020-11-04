@@ -5,6 +5,7 @@ import { UserProfileProvider } from "./providers/UserProfileProvider";
 import { ConditionProvider } from "./providers/ConditionProvider";
 import { CategoryProvider } from "./providers/CategoryProvider";
 import Header from "./components/Header";
+//Import the ApplicationViews component into app.js and wrap it in other Providers and the Router on outer.
 import ApplicationViews from "./components/ApplicationViews";
 import { ImageProvider } from './providers/ImageProvider';
 import Footer from './Footer';

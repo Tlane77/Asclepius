@@ -27,6 +27,7 @@ const ConditionForm = () => {
     const { addCondition } = useContext(ConditionContext);
     const [categoryId, setCategoryId] = useState(0);
     const { categories, getAllCategories } = useContext(CategoryContext);
+    //use this hook to allow programatically redirect users
     const history = useHistory();
     const title = useRef();
     const content = useRef();
@@ -58,7 +59,7 @@ const ConditionForm = () => {
 
 
 
-
+//new condition that will be added to the state
 
     const submit = () => {
         const condition = {
@@ -204,6 +205,8 @@ const ConditionForm = () => {
         </div>
     );
 };
+
+//ConditionList and the Edit and Delete forms pull data from this component
 
 
 export default ConditionForm;

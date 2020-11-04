@@ -33,6 +33,7 @@ const EditCondition = () => {
     const content = useRef();
     const imageName = useRef();
 
+
     useEffect(() => {
         getAllCategories()
     }, []);
@@ -111,16 +112,22 @@ const EditCondition = () => {
         }
 
 
-
+        //UpdatedCondition is a parameter which is a condition object (containing all properties)
         EditCondition(updatedCondition)
             .then(() => history.push(`/conditions/details/${conditionId}`));
 
 
     }
 
+    //The conditionDetails component renders retreiving null(user fills in form or if else statement does submisson error after submit or cancel)
+    //The form runs useEffect(useEffect)
+    //A fetch call is made to api/conditions/id(fetch)in provider(this returns from repository getConditionById, EndPoint(HTTP {id}))
+   
 
+    ///Get single condition that matches this id,talk to api to find get method that requires id ( getConditionById)
+    //Refrences method in Provider GetSingleCondition (getSingleCondition is the method that contains fetch call)
     useEffect(() => {
-        getSingleCondition(conditionId)
+        getSingleCondition(conditionId)   /*(useParams get id)*/ 
     }, [])
 
     console.log("condition", condition)
@@ -210,6 +217,7 @@ const EditCondition = () => {
 
 
                                 </Form>
+
                                 <Button
                                     color="info"
                                     style={{ margin: 10 }}
@@ -217,6 +225,7 @@ const EditCondition = () => {
                                     onClick={submit}
                                 >Submit
                                 </Button>
+                                //
                                 <Button color="info"
                                     style={{ margin: 10 }}
                                     disabled={isLoading}

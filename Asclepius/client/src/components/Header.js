@@ -11,11 +11,13 @@ import {
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
 
+//Header will be navbar component; 
+
 export default function Header() {
     const { isLoggedIn, logout } = useContext(UserProfileContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const { users, anyuser, getAllUsers, currentUser, getUserById, getCurrentUser } = useContext(UserProfileContext);
+   
 
     return (
         <div>
@@ -80,7 +82,7 @@ export default function Header() {
 
                         <NavItem>
                             <a aria-current="page" className="nav-link"
-                                href="https://www.youtube.com/watch?v=t56lpSJ2GXQ"
+                                href="https://www.youtube.com/https://www.naughtylittlemastcells.com/get-started/?v=t56lpSJ2GXQ"
                                 target="_new">▶️Welcome to Asclepius</a>
                         </NavItem>
 

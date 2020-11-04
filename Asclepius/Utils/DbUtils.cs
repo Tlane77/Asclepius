@@ -6,7 +6,9 @@ using Microsoft.Data.SqlClient;
 using Asclepius.Models;
 using Asclepius.Repositories;
 
-
+/// <summary>
+/// This is my helper file, a customized set of usefule fuctions for interacting wiht th ADO.NET
+/// </summary>
 namespace Asclepius.Utils
 {
     public class DbUtils

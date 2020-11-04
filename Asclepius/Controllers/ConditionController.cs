@@ -28,22 +28,25 @@ namespace Asclepius.Controllers
 
         }
 
-        //GRAB ALL THE CONDITIONS 
+        //GRAB ALL THE CONDITIONS,get a unique matching conditions (all)
         [HttpGet]
         public IActionResult GetAllConditions()
         {
             return Ok(_conditionRepository.GetAllConditions());
         }
 
-        [HttpGet("{id}")]
+        //get a unique matching condition by conditon Id (endpoint)
+        [HttpGet("{id}")] //id parameter
         public IActionResult Get(int id)
         {
-
+            //Type name = repository .methodGetID(parameter id)( read right to left)
             Condition condition = _conditionRepository.GetConditionById(id);
+            //if null return (NotFound)
             if (condition == null)
             {
                 return NotFound();
             }
+            //Otherwise return OK(status 200) (complete object)/.then response on client side
             return Ok(condition);
         }
 
@@ -61,7 +64,7 @@ namespace Asclepius.Controllers
        
 
         //UPDATE CONTROLLER ACTION
-        [HttpPut("{id}")]
+        [HttpPut("{id}")] //update endpoint
         public IActionResult Put(int id, Condition condition)
         {
             var currentUserProfile = GetCurrentUserProfile();

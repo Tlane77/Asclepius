@@ -2,24 +2,28 @@ import React, { useEffect, useContext, useState } from "react";
 import { Card, CardImg, CardBody, Button, CardSubtitle, } from "reactstrap";
 import { ConditionContext } from "../../providers/ConditionProvider";
 import { ImageContext } from '../../providers/ImageProvider';
+//get access to the route parameters
 import { useParams, useHistory, Link } from "react-router-dom";
 import "./Condition.css"
 import "./Condition.css"
+import DayJS from 'react-dayjs';
+
 
 
 const ConditionDetail = () => {
+    //putting a single condition into state
     const { getSingleCondition, condition } = useContext(ConditionContext);
     const [image, setImage] = useState()
-    
 
 
 
+    //using the getImage funtion the contextProvider from ImageProvider brings in for us.
     const { getImageName } = useContext(ImageContext);
     const { id } = useParams();
     const history = useHistory();
 
 
-
+    //This useEffect runs when form changes happen (as edit is clicked and route changes)
 
     useEffect(() => {
 
@@ -40,8 +44,8 @@ const ConditionDetail = () => {
 
 
 
-    
-    
+
+
     if (condition.userProfile == undefined) {
         return null;
     }
@@ -65,7 +69,8 @@ const ConditionDetail = () => {
 
                 <CardBody>
                     <p style={{ whiteSpace: "pre-wrap" }}>{condition.content}</p>
-                    <p>{condition.createDateTime}</p>
+                    <p><DayJS format="MMM D, YY h:mm A">{condition.createDateTime}</DayJS></p>
+
                     <Button type="button"
                         style={{ margin: 10 }}
                         onClick={() => { history.goBack() }}>
@@ -88,13 +93,16 @@ const ConditionDetail = () => {
                         Delete
 
                 </Button >}
+
+                    {/* //The react-router-dom triggers the router component with a path of /condtions/edit/id (the route changes) */}
                     {JSON.parse(sessionStorage.getItem("userProfile")).id === condition.userProfileId && <Button color="info"
                         style={{ margin: 10 }}
 
-                        onClick={() => { history.push(`/conditions/edit/${id}`) }}>
+                        onClick={() => { history.push(`/conditions/edit/${id}`) }}>   { /*(useParams get id)*/}
                         Edit
 
                 </Button >}
+
                 </CardBody >
 
 

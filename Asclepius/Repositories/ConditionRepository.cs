@@ -9,12 +9,15 @@ using Asclepius.Utils;
 using Microsoft.Data.SqlClient;
 using System.Web;
 
+//Remember the less trips to your database the better your performance so minimize your SQL call methods
+
 namespace Asclepius.Repositories
 {
     public class ConditionRepository : BaseRepository, IConditionRepository
     {
         public ConditionRepository(IConfiguration configuration) : base(configuration) { }
 
+        //Get a List of conditions and the UserProfile data in this call to the database
          public List<Condition> GetAllConditions()
         {
             using (var conn = Connection)
@@ -71,6 +74,7 @@ namespace Asclepius.Repositories
             }
         }
 
+       
         public List<Condition> GetAllUserConditions(int UPID)
         {
             using (var conn = Connection)
@@ -127,7 +131,7 @@ namespace Asclepius.Repositories
             }
         }
 
-
+        //Get and Individual Conditon by id method returns requested object (getConditionById method) to client side
         public Condition GetConditionById(int id)
         {
             using (var conn = Connection)
@@ -183,6 +187,8 @@ namespace Asclepius.Repositories
                 }
             }
         }
+
+        //ADD a Condition with all tables and userProfile date
         public void Add(Condition condition)
         {
             using (var conn = Connection)
@@ -207,7 +213,7 @@ namespace Asclepius.Repositories
                 }
             }
         }
-
+        //Edit(client)/Update(server) on a Condition
         public void Update(Condition condition)
         {
             using (var conn = Connection)
@@ -238,6 +244,7 @@ namespace Asclepius.Repositories
             }
         }
 
+        //Delete a Condition 
         public void DeleteCondition(int id)
         {
             using (var conn = Connection)
@@ -250,7 +257,7 @@ namespace Asclepius.Repositories
                                         WHERE ConditionId = @id;
                                         DELETE FROM Condition
                                         WHERE Id = @id;";
-
+                    // using dbutils helper method; passing in SqlCommand cmd, name of the parameter, value of the parameter passed in
                     DbUtils.AddParameter(cmd, "@id", id);
                     cmd.ExecuteNonQuery();
                 }

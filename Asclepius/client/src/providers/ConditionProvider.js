@@ -75,6 +75,7 @@ export const ConditionProvider = (props) => {
 
 
     return (
+        //this provides the state value of the conditions array, the functions to fetch all conditions and add a new conditon with Edit and Delete Components, get all the conditions, get one single condition
         <ConditionContext.Provider value={{ condition, conditions, setCondition, setConditions, getAllConditions, addCondition, EditCondition, getSingleCondition, DeleteCondition }}>
             {props.children}
         </ConditionContext.Provider>

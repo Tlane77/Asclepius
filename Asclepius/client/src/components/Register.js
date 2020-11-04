@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Card, CardTitle } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
-
+import "./Register.css"
 export default function Register() {
   const history = useHistory();
   const { register } = useContext(UserProfileContext);
@@ -26,36 +26,44 @@ export default function Register() {
   };
 
   return (
-    <Form onSubmit={registerClick}>
-      <fieldset>
-        <FormGroup>
-          <Label htmlFor="displayName">DisplayName</Label>
-          <Input id="displayName" type="text" onChange={e => setDisplayName(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="firstName">FirstName</Label>
-          <Input id="firstName" type="text" onChange={e => setFirstName(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="lastName">LastName</Label>
-          <Input id="lastName" type="text" onChange={e => setLastName(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
-          <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Button>Register</Button>
-        </FormGroup>
-      </fieldset>
-    </Form>
+    <div className="register-container">
+      <Row className="justify-content-center">
+        <Card className="col-lg-4">
+          <CardTitle><h3 className="mt-3 text-primary text-center">Create New User Profile</h3></CardTitle>
+          <Form onSubmit={registerClick}>
+            <fieldset>
+              <FormGroup>
+                <i class="fa fa-user icon"></i>
+                <Label htmlFor="displayName">DisplayName</Label>
+                <Input id="displayName" type="text" onChange={e => setDisplayName(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="firstName">FirstName</Label>
+                <Input id="firstName" type="text" onChange={e => setFirstName(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="lastName">LastName</Label>
+                <Input id="lastName" type="text" onChange={e => setLastName(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Label for="email">Email</Label>
+                <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Label for="password">Password</Label>
+                <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Label for="confirmPassword">Confirm Password</Label>
+                <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
+              </FormGroup>
+              <FormGroup>
+                <Button>Register</Button>
+              </FormGroup>
+            </fieldset>
+          </Form>
+        </Card>
+      </Row>
+    </div>
   );
 }

@@ -28,16 +28,14 @@ const CategoryList = (props) => {
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+
                         </tr>
                     </thead>
                     {categories.map((category) => (
                         <tbody key={category.id}>
                             <tr>
                                 <td>{category.name}</td>
-                                {category.id != 10 ? <td><Link to={`/category/${category.id}/edit`}><Button className="editCategoryButton" color="success">Edit</Button></Link></td> : <td>Edit Not Allowed.</td>}
-                                {category.id != 10 ? <td><Link to={`/category/${category.id}/delete`}><Button className="deleteCategoryButton" color="warning">Delete</Button></Link></td> : <td>Delete Not Allowed.</td>}
+
 
                             </tr>
                         </tbody>

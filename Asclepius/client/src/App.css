@@ -37,13 +37,7 @@ footer {
   color: white;
 }
 
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
+.container{
+  background: linear-gradient(to top, #fffacd 10%, #ffffff 68%);
+}
 
